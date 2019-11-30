@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using Users_Ms.Business.Commands;
 using System.Text.Json;
 using System;
+using Users_MS.DTO;
+using Users_Ms.Data;
 
 namespace Users_Ms.Controllers
 {
@@ -34,7 +36,22 @@ namespace Users_Ms.Controllers
             var json = JsonSerializer.Serialize(user);
             return json;
         }
-        
+
+        [HttpGet("{userName}/{password}")]
+        public async Task<ActionResult<string>> GetUsersByUserNameAndPassword(string userName,string password)
+        {
+            var user = await _mediator.Send(new GetUserByUsernameAndPasswordQuery(userName,password));
+            var json = JsonSerializer.Serialize(user);
+            return json;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<string>> Create([FromForm]CreateUser dto)
+        {
+            var user = await _mediator.Send(dto);
+            var json = JsonSerializer.Serialize(user);
+            return json;
+        }
     }
 
 
