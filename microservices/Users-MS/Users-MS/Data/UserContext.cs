@@ -28,6 +28,7 @@ namespace Users_Ms.Data
             modelBuilder.Entity<User>()
                 .Property(u => u.FirstName)
                 .IsRequired().HasMaxLength(20);
+          
 
             modelBuilder.Entity<User>()
                 .Property(u => u.LastName)

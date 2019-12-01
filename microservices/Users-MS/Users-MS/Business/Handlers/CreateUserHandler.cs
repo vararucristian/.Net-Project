@@ -20,7 +20,6 @@ namespace Users_MS.Business.Handlers
 
         public async Task<User> Handle(CreateUser request, CancellationToken cancellationToken)
         {
-            Console.WriteLine(request.Email);
             var user = User.Create(request.FirstName, request.LastName, request.UserName, request.Email, request.Password);
             UserContext.Users.Add(user);
             await UserContext.SaveChangesAsync(cancellationToken);
