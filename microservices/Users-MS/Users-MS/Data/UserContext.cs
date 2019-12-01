@@ -28,7 +28,7 @@ namespace Users_Ms.Data
             modelBuilder.Entity<User>()
                 .Property(u => u.FirstName)
                 .IsRequired().HasMaxLength(20);
-          
+
 
             modelBuilder.Entity<User>()
                 .Property(u => u.LastName)
@@ -36,20 +36,26 @@ namespace Users_Ms.Data
 
             modelBuilder.Entity<User>()
                 .Property(u => u.UserName)
-                .IsRequired().HasMaxLength(20);
+                .IsRequired()
+                .HasColumnType("unique")
+                .HasMaxLength(20);
 
+            
             modelBuilder.Entity<User>()
                 .Property(u => u.Email)
-                .IsRequired().HasMaxLength(40);
+                .IsRequired()
+                .HasColumnType("unique")
+                .HasMaxLength(40);
 
             modelBuilder.Entity<User>()
                 .Property(u => u.Password)
                 .IsRequired().HasMaxLength(50);
 
-            Seed(modelBuilder);
+            
+           /* Seed(modelBuilder);*/
         }
 
-        private void Seed(ModelBuilder modelBuilder)
+       /* private void Seed(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasData(
                 User.Create("test1", "test1", "test1", "test1", "test1"),
@@ -57,6 +63,6 @@ namespace Users_Ms.Data
                 User.Create("test3", "test1", "test1", "test1", "test1")
 
                 );
-        }
+        }*/
     }
 }

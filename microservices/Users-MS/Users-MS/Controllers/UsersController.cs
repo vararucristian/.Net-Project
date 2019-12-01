@@ -5,6 +5,7 @@ using Users_Ms.Business.Commands;
 using System.Text.Json;
 using System;
 using Users_MS.DTO;
+using Users_Ms.Data;
 
 namespace Users_Ms.Controllers
 {
@@ -52,6 +53,26 @@ namespace Users_Ms.Controllers
             var json = JsonSerializer.Serialize(user);
             return json;
 
+        }
+
+        [HttpPut]
+        public async Task<ActionResult<string>> Update([FromBody]UpdateUser jsonRequest)
+        {
+
+            var user = await _mediator.Send(jsonRequest);
+            var json = JsonSerializer.Serialize(user);
+            return json;
+
+        }
+
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<string>> Delete(Guid id)
+        {
+
+            var user = await _mediator.Send(new DeleteUser(id));
+            var json = JsonSerializer.Serialize(user);
+            return json;
         }
     }
 
