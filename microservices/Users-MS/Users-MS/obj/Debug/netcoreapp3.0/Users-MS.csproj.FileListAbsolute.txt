@@ -118,6 +118,9 @@ F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\bin\Debug\netcoreap
 F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\bin\Debug\netcoreapp3.0\Users-MS.runtimeconfig.dev.json
 F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\bin\Debug\netcoreapp3.0\Users-MS.dll
 F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\bin\Debug\netcoreapp3.0\Users-MS.pdb
-F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\obj\Debug\netcoreapp3.0\Users-MS.MvcApplicationPartsAssemblyInfo.cache
 F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\obj\Debug\netcoreapp3.0\Users-MS.dll
 F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\obj\Debug\netcoreapp3.0\Users-MS.pdb
+F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.JsonPatch.dll
+F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\bin\Debug\netcoreapp3.0\Newtonsoft.Json.Bson.dll
+F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\obj\Debug\netcoreapp3.0\Users-MS.MvcApplicationPartsAssemblyInfo.cache
