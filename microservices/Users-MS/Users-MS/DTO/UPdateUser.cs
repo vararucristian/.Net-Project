@@ -1,9 +1,10 @@
 ﻿using MediatR;
 using System;
+using System.Collections.Generic;
 
 namespace Users_Ms.Data
 {
-    public class UpdateUser: IRequest<User>
+    public class UPdateUser: IRequest<Dictionary<string, object>>
     {
         public Guid Id { get; set; }
 

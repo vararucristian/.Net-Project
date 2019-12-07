@@ -5,7 +5,7 @@ using Users_Ms.Data;
 
 namespace Users_MS.DTO
 {
-    public class DeleteUser:IRequest<User>
+    public class DeleteUser:IRequest<Dictionary<string, object>>
     {
         public DeleteUser(Guid id)
         {

@@ -10,7 +10,7 @@ using Users_MS.DTO;
 
 namespace Users_MS.Business.Handlers
 {
-    public class DeleteUserHandler : IRequestHandler<DeleteUser, User>
+    public class DeleteUserHandler : IRequestHandler<DeleteUser, Dictionary<string, object>>
     {
         private readonly UserContext UserContext;
         private readonly IMediator _mediator;
@@ -21,16 +21,22 @@ namespace Users_MS.Business.Handlers
         }
 
 
-        public async Task<User> Handle(DeleteUser request, CancellationToken cancellationToken)
+        public async Task<Dictionary<string, object>> Handle(DeleteUser request, CancellationToken cancellationToken)
         {
-            var user = await _mediator.Send(new GetUserByIdQuery(request.Id));
+            var response = new Dictionary<string, object>();
+            var getRresponse = await _mediator.Send(new GetUserByIdQuery(request.Id));
+            var user = (User)getRresponse["user"];
             if (user != null)
             {
                 UserContext.Users.Remove(user);
                 UserContext.SaveChanges();
-                
+                response.Add("succes", true);
             }
-            return user;
+            else
+            {
+                response.Add("succes", false);
+            }
+            return response;
         }
     }
 }

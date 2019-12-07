@@ -6,12 +6,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20191129195255_InitialMigration.cs" />
+    <Compile Remove="Migrations\20191129195255_InitialMigration.Designer.cs" />
     <Compile Remove="Migrations\20191201194435_unique_elements.cs" />
     <Compile Remove="Migrations\20191201194435_unique_elements.Designer.cs" />
     <Compile Remove="Migrations\20191201195536_unique.cs" />
     <Compile Remove="Migrations\20191201195536_unique.Designer.cs" />
     <Compile Remove="Migrations\20191201195953_unique.cs" />
     <Compile Remove="Migrations\20191201195953_unique.Designer.cs" />
+    <Compile Remove="Migrations\20191201200641_unique.cs" />
+    <Compile Remove="Migrations\20191201200641_unique.Designer.cs" />
+    <Compile Remove="Migrations\20191207094904_unique.cs" />
+    <Compile Remove="Migrations\20191207094904_unique.Designer.cs" />
+    <Compile Remove="Migrations\20191207095505_unique.cs" />
+    <Compile Remove="Migrations\20191207095505_unique.Designer.cs" />
+    <Compile Remove="Migrations\20191207095741_unique.cs" />
+    <Compile Remove="Migrations\20191207095741_unique.Designer.cs" />
+    <Compile Remove="Migrations\20191207100754_Initial-Migration.cs" />
+    <Compile Remove="Migrations\20191207100754_Initial-Migration.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +38,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
+    <PackageReference Include="NLog" Version="4.6.8" />
   </ItemGroup>
 
   <ItemGroup>

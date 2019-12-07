@@ -123,4 +123,5 @@ F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\obj\Debug\netcoreap
 F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.JsonPatch.dll
 F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\bin\Debug\netcoreapp3.0\Newtonsoft.Json.Bson.dll
+F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\bin\Debug\netcoreapp3.0\NLog.dll
 F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\obj\Debug\netcoreapp3.0\Users-MS.MvcApplicationPartsAssemblyInfo.cache

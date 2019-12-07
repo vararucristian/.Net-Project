@@ -4,10 +4,11 @@ using Users_Ms.Data;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace Users_Ms.Business.Handlers
 {
-    public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, User>
+    public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, Dictionary<string, object>>
     {
         private readonly UserContext UserContext;
 
@@ -15,11 +16,22 @@ namespace Users_Ms.Business.Handlers
         {
             UserContext = userContext;
         }
-        public async Task<User> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
+        public async Task<Dictionary<string, object>> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
         {
+
+            var response = new Dictionary<string, object>();
             var users = UserContext.Users;
             var user = users.Where(u => u.Id == request.Id).FirstOrDefault();
-            return user;
+            if(user == null)
+            {
+                response.Add("succes", false);
+            }
+            else
+            {
+                response.Add("succes", true);
+            }
+            response.Add("user", user);
+            return response;
         }
     }
 }

@@ -8,19 +8,19 @@ using Users_MS.DTO;
 
 namespace Users_MS.Business.Handlers
 {
-    public class GetUserByUsernameAndPasswordQueryHandler : IRequestHandler<GetUserByUsernameAndPasswordQuery, Dictionary<string, object>>
+    public class GetUserByUsernameQueryHandler : IRequestHandler<GetUserByUsernameQuery, Dictionary<string, object>>
     {
         private readonly UserContext UserContext;
-        public GetUserByUsernameAndPasswordQueryHandler(UserContext userContext)
+        public GetUserByUsernameQueryHandler(UserContext userContext)
         {
             UserContext = userContext;
         }
 
-        public async Task<Dictionary<string, object>> Handle(GetUserByUsernameAndPasswordQuery request, CancellationToken cancellationToken)
+        public async Task<Dictionary<string, object>> Handle(GetUserByUsernameQuery request, CancellationToken cancellationToken)
         {
             var response = new Dictionary<string, object>();
             var users = UserContext.Users;
-            var user = users.Where(u => u.UserName == request.UserName && u.Password == request.Password).FirstOrDefault();
+            var user = users.Where(u => u.UserName == request.UserName).FirstOrDefault();
             if (user == null)
             {
                 response.Add("succes", false);
