@@ -1,8 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Pets_MS.Data
 {
@@ -80,7 +76,7 @@ namespace Pets_MS.Data
             modelBuilder.Entity<Location>()
                 .HasMany<Pet>(l => l.Pets)
                 .WithOne(p => p.Location)
-                .HasForeignKey(p => p.IdLocation);
+                .HasForeignKey(p => p.LocationId);
 
 
             Seed(modelBuilder);
@@ -92,7 +88,7 @@ namespace Pets_MS.Data
             modelBuilder.Entity<Location>().HasData(
                 loc);
             modelBuilder.Entity<Pet>().HasData(
-                Pet.Create("Otto", "dog", "male", "Cristian", "my dog is happy", loc)
+                Pet.Create("Otto", "dog", "male", "Cristian", "my dog is happy", loc.Id)
                 ) ;
         }
     }

@@ -1,7 +1,6 @@
 ﻿using MediatR;
-using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Users_Ms.Business.Commands;
@@ -9,28 +8,45 @@ using Users_Ms.Data;
 
 namespace Users_MS.Business.Handlers
 {
-    public class UpdateUserHandler : IRequestHandler<UpdateUser, User>
+    public class UpdateUserHandler : IRequestHandler<UPdateUser, Dictionary<string, object>>
     {
         private readonly UserContext UserContext;
         private readonly IMediator _mediator;
+        private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         public UpdateUserHandler(UserContext userContext, IMediator mediator)
         {
             UserContext = userContext;
             _mediator = mediator;
         }
 
-        public async Task<User> Handle(UpdateUser request, CancellationToken cancellationToken)
+        public async Task<Dictionary<string, object>> Handle(UPdateUser request, CancellationToken cancellationToken)
         {
-            var user = await _mediator.Send(new GetUserByIdQuery(request.Id));
+            bool succes = false;
+            var response = new Dictionary<string, object>();
+            var getResponse = await _mediator.Send(new GetUserByIdQuery(request.Id));
+            var user = (User)getResponse["user"];
             if (user != null)
             {
-                user.Email = request.Email;
-                user.Password = request.Password;
-                user.FirstName = request.FirstName;
-                user.LastName = request.LastName;
-                UserContext.SaveChanges();
+                try
+                {
+
+                    user.Email = request.Email;
+                    user.Password = request.Password;
+                    user.FirstName = request.FirstName;
+                    user.LastName = request.LastName;
+                    UserContext.SaveChanges();
+                    succes = true;
+                }
+                catch (DbUpdateException)
+                {
+                    logger.Info("Missing data from json body!");
+                }
+
+
             }
-            return user;            
+            response.Add("succes", succes);
+            response.Add("user", user);
+            return response;
         }
     }
 }

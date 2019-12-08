@@ -1,25 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Facultate\\.NET\\.Net-Project\\microservices\\Users-MS\\Users-MS\\Users-MS.csproj": {}
+    "F:\\.Net\\Project\\.Net-Project\\microservices\\Users-MS\\Users-MS\\Users-MS.csproj": {}
   },
   "projects": {
-    "D:\\Facultate\\.NET\\.Net-Project\\microservices\\Users-MS\\Users-MS\\Users-MS.csproj": {
+    "F:\\.Net\\Project\\.Net-Project\\microservices\\Users-MS\\Users-MS\\Users-MS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Facultate\\.NET\\.Net-Project\\microservices\\Users-MS\\Users-MS\\Users-MS.csproj",
+        "projectUniqueName": "F:\\.Net\\Project\\.Net-Project\\microservices\\Users-MS\\Users-MS\\Users-MS.csproj",
         "projectName": "Users-MS",
-        "projectPath": "D:\\Facultate\\.NET\\.Net-Project\\microservices\\Users-MS\\Users-MS\\Users-MS.csproj",
-        "packagesPath": "C:\\Users\\Steve\\.nuget\\packages\\",
-        "outputPath": "D:\\Facultate\\.NET\\.Net-Project\\microservices\\Users-MS\\Users-MS\\obj\\",
+        "projectPath": "F:\\.Net\\Project\\.Net-Project\\microservices\\Users-MS\\Users-MS\\Users-MS.csproj",
+        "packagesPath": "C:\\Users\\varar\\.nuget\\packages\\",
+        "outputPath": "F:\\.Net\\Project\\.Net-Project\\microservices\\Users-MS\\Users-MS\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\Steve\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\varar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.0"
@@ -75,6 +74,10 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[3.0.0, )"
+            },
+            "NLog": {
+              "target": "Package",
+              "version": "[4.6.8, )"
             }
           },
           "imports": [

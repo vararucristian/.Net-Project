@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MediatR;
 using Users_Ms.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Users_Ms
 {
@@ -22,7 +23,8 @@ namespace Users_Ms
         {
             services.AddControllers();
 
-            services.AddDbContext<UserContext>();
+            services.AddDbContext<UserContext>(options =>
+                options.UseSqlServer("Server=localhost;  Database=Users;  Trusted_Connection=True;"));
 
             services.AddMediatR(typeof(Startup).Assembly);
 

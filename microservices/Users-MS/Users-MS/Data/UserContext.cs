@@ -5,16 +5,16 @@ namespace Users_Ms.Data
     public class UserContext : DbContext
     {
         public DbSet<User> Users { get; private set; }
-        public UserContext()
+        public UserContext(DbContextOptions<UserContext> options) : base (options)
         {
             Database.EnsureCreated();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
+            /*if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer("Server=localhost;  Database=Users;  Trusted_Connection=True;");
-            }
+            }*/
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -37,32 +37,27 @@ namespace Users_Ms.Data
             modelBuilder.Entity<User>()
                 .Property(u => u.UserName)
                 .IsRequired()
-                .HasColumnType("unique")
                 .HasMaxLength(20);
 
-            
+            modelBuilder.Entity<User>()
+                .HasAlternateKey(u => u.UserName)
+                .HasName("AlternateKey_UserName");
+
             modelBuilder.Entity<User>()
                 .Property(u => u.Email)
                 .IsRequired()
-                .HasColumnType("unique")
                 .HasMaxLength(40);
+
+            modelBuilder.Entity<User>()
+                .HasAlternateKey(u => u.Email)
+                .HasName("AlternateKey_Email");
 
             modelBuilder.Entity<User>()
                 .Property(u => u.Password)
                 .IsRequired().HasMaxLength(50);
 
-            
-           /* Seed(modelBuilder);*/
         }
 
-       /* private void Seed(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<User>().HasData(
-                User.Create("test1", "test1", "test1", "test1", "test1"),
-                User.Create("test2", "test1", "test1", "test1", "test1"),
-                User.Create("test3", "test1", "test1", "test1", "test1")
 
-                );
-        }*/
     }
 }

@@ -10,8 +10,8 @@ using Users_Ms.Data;
 namespace Users_MS.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20191201200641_unique")]
-    partial class unique
+    [Migration("20191207101559_Initial-Migration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,7 +30,7 @@ namespace Users_MS.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("unique")
+                        .HasColumnType("nvarchar(40)")
                         .HasMaxLength(40);
 
                     b.Property<string>("FirstName")
@@ -50,10 +50,16 @@ namespace Users_MS.Migrations
 
                     b.Property<string>("UserName")
                         .IsRequired()
-                        .HasColumnType("unique")
+                        .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
 
                     b.HasKey("Id");
+
+                    b.HasAlternateKey("Email")
+                        .HasName("AlternateKey_Email");
+
+                    b.HasAlternateKey("UserName")
+                        .HasName("AlternateKey_UserName");
 
                     b.ToTable("Users");
                 });

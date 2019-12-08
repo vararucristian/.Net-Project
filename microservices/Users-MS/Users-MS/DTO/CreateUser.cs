@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using Users_Ms.Data;
+using System.Collections.Generic;
 
 namespace Users_MS.DTO
 {
-    public class CreateUser: IRequest<User>
+    public class CreateUser: IRequest<Dictionary<string, object>>
     {
         public string FirstName { get;  set; }
 
@@ -15,14 +15,14 @@ namespace Users_MS.DTO
 
         public string Password { get;  set; }
 
-        public CreateUser(string firstName,string lastName,string userName,string email , string password)
+/*        public CreateUser(string firstName,string lastName,string userName,string email , string password)
         {
             FirstName = firstName;
             LastName = lastName;
             UserName = userName;
             Email = email;
             Password = password;
-        }
+        }*/
 
     }
 }

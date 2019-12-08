@@ -32,16 +32,37 @@ namespace Users_Ms.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<string>> GetUsersByIdAsync(Guid id)
         {
-            var user = await _mediator.Send(new GetUserByIdQuery(id));
-            var json = JsonSerializer.Serialize(user);
+            var response = await _mediator.Send(new GetUserByIdQuery(id));
+            var json = JsonSerializer.Serialize(response);
+            if (response["succes"].Equals(false))
+            {
+                return BadRequest(json);
+            }
             return json;
         }
 
-        [HttpGet("{userName}/{password}")]
-        public async Task<ActionResult<string>> GetUsersByUserNameAndPassword(string userName,string password)
+        [HttpGet("username/{userName}")]
+        public async Task<ActionResult<string>> GetUsersByUserNameAndPassword(string userName)
         {
-            var user = await _mediator.Send(new GetUserByUsernameAndPasswordQuery(userName,password));
-            var json = JsonSerializer.Serialize(user);
+            var response = await _mediator.Send(new GetUserByUsernameQuery(userName));
+            var json = JsonSerializer.Serialize(response);
+            if (response["succes"].Equals(false))
+            {
+                return BadRequest(json);
+            }
+            return json;
+        }
+
+
+        [HttpGet("{userName}/{password}")]
+        public async Task<ActionResult<string>> GetUsersByUserNameAndPassword(string userName, string password)
+        {
+            var response = await _mediator.Send(new GetUserByUsernameAndPasswordQuery(userName, password));
+            var json = JsonSerializer.Serialize(response);
+            if (response["succes"].Equals(false))
+            {
+                return BadRequest(json);
+            }
             return json;
         }
 
@@ -49,19 +70,32 @@ namespace Users_Ms.Controllers
         public async Task<ActionResult<string>> Create([FromBody]CreateUser jsonRequest)
         {
 
-            var user = await _mediator.Send(jsonRequest);
-            var json = JsonSerializer.Serialize(user);
-            return json;
-
+            var response = await _mediator.Send(jsonRequest);
+            var json = JsonSerializer.Serialize(response);
+            if (response["succes"].Equals(false))
+            {
+                return BadRequest(json);
+            }
+            else
+            {
+                return json;
+            }
         }
 
-        [HttpPut]
-        public async Task<ActionResult<string>> Update([FromBody]UpdateUser jsonRequest)
-        {
 
-            var user = await _mediator.Send(jsonRequest);
-            var json = JsonSerializer.Serialize(user);
-            return json;
+        [HttpPut]
+        public async Task<ActionResult<string>> Update([FromBody]UPdateUser jsonRequest)
+        {
+            var response = await _mediator.Send(jsonRequest);
+            var json = JsonSerializer.Serialize(response);
+            if (response["succes"].Equals(false))
+            {
+                return BadRequest(json);
+            }
+            else
+            {
+                return json;
+            }
 
         }
 
@@ -69,10 +103,18 @@ namespace Users_Ms.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<string>> Delete(Guid id)
         {
+            var response = await _mediator.Send(new DeleteUser(id));
+            var json = JsonSerializer.Serialize(response);
+            if (response["succes"].Equals(false))
+            {
+                return BadRequest(json);
+            }
+            else
+            {
+                return json;
+            }
 
-            var user = await _mediator.Send(new DeleteUser(id));
-            var json = JsonSerializer.Serialize(user);
-            return json;
+
         }
     }
 
