@@ -1,7 +1,9 @@
-﻿using System.Text.Json;
+﻿using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Pets_Ms.Business.Commands;
 using Pets_MS.DTO;
 
 namespace Pets_MS.Controllers
@@ -40,6 +42,17 @@ namespace Pets_MS.Controllers
             {
                 return json;
             }
+        }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<string>> GetPetsByIdAsync(Guid id)
+        {
+            var response = await _mediator.Send(new GetPetByIdQuery(id));
+            var json = JsonSerializer.Serialize(response);
+            if (response["succes"].Equals(false))
+            {
+                return BadRequest(json);
+            }
+            return json;
         }
     }
 }
