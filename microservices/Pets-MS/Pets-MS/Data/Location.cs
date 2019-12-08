@@ -9,9 +9,7 @@ namespace Pets_MS.Data
     {
         public Guid Id { get; private set; }
         public string Country { get; private set; }
-        public string City { get; private set; }
-        public string Street { get; private set; }
-        public string Number { get; private set; }
+        public string ZipCode { get; private set; }
         public ICollection<Pet> Pets { get; private set; }
 
         private Location()
@@ -19,17 +17,14 @@ namespace Pets_MS.Data
 
         }
 
-        public static Location Create(string country, string city, string street, string number)
+        public static Location Create(string country, string zipCode)
         {
             return new Location
             {
                 Id = Guid.NewGuid(),
                 Country = country,
-                City = city,
-                Street = street,
-                Number = number,
+                ZipCode= zipCode
             };
         }
-
     }
 }

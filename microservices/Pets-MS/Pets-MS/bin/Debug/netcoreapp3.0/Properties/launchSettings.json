@@ -20,8 +20,8 @@
     "Pets_MS": {
       "commandName": "Project",
       "launchBrowser": false,
-      "launchUrl": "weatherforecast",
-      "applicationUrl": "https://localhost:5020;",
+      "launchUrl": "pets",
+      "applicationUrl": "https://localhost:5020",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

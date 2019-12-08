@@ -26,39 +26,22 @@ namespace Pets_MS.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasMaxLength(36);
 
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(36)")
-                        .HasMaxLength(36);
-
                     b.Property<string>("Country")
                         .IsRequired()
                         .HasColumnType("nvarchar(36)")
                         .HasMaxLength(36);
 
-                    b.Property<string>("Number")
+                    b.Property<string>("ZipCode")
                         .IsRequired()
-                        .HasColumnType("nvarchar(36)")
-                        .HasMaxLength(36);
-
-                    b.Property<string>("Street")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(36)")
-                        .HasMaxLength(36);
+                        .HasColumnType("nvarchar(10)")
+                        .HasMaxLength(10);
 
                     b.HasKey("Id");
 
-                    b.ToTable("Locations");
+                    b.HasAlternateKey("ZipCode", "Country")
+                        .HasName("AlternateKey_Country_ZipCode");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("a4c6e27a-57b8-4715-8073-7cb75ec185c0"),
-                            City = "Iasi",
-                            Country = "Romania",
-                            Number = "1",
-                            Street = "Street"
-                        });
+                    b.ToTable("Locations");
                 });
 
             modelBuilder.Entity("Pets_MS.Data.Pet", b =>
@@ -67,6 +50,9 @@ namespace Pets_MS.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasMaxLength(36);
+
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -101,18 +87,6 @@ namespace Pets_MS.Migrations
                     b.HasIndex("LocationId");
 
                     b.ToTable("Pets");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("ee9a1c4b-8bec-4816-b9f1-730aeeac48a1"),
-                            Description = "my dog is happy",
-                            Genre = "male",
-                            LocationId = new Guid("a4c6e27a-57b8-4715-8073-7cb75ec185c0"),
-                            Name = "Otto",
-                            Species = "dog",
-                            Username = "Cristian"
-                        });
                 });
 
             modelBuilder.Entity("Pets_MS.Data.Pet", b =>
