@@ -6,17 +6,17 @@ namespace Pets_MS.Data
     {
         public DbSet<Pet> Pets { get; private set; }
         public DbSet<Location> Locations { get; private set; }
-        public PetContext()
+        public PetContext(DbContextOptions<PetContext> options) : base (options)
         {
             Database.EnsureCreated();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
+            /*if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer("Server=localhost;  Database=Pets;  Trusted_Connection=True;");
             }
-        }
+*/        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -45,6 +45,9 @@ namespace Pets_MS.Data
             modelBuilder.Entity<Pet>()
                .Property(p => p.Species)
                .IsRequired().HasMaxLength(36);
+            modelBuilder.Entity<Pet>()
+               .Property(p => p.BirthDate)
+               .IsRequired();
 
             modelBuilder.Entity<Pet>()
                  .HasOne<Location>(p => p.Location)
@@ -53,43 +56,27 @@ namespace Pets_MS.Data
             modelBuilder.Entity<Location>().HasKey(l => l.Id);
 
             modelBuilder.Entity<Location>()
-               .Property(l => l.Id )
+               .Property(l => l.Id)
                .IsRequired().HasMaxLength(36);
 
             modelBuilder.Entity<Location>()
-               .Property(l => l.City)
-               .IsRequired().HasMaxLength(36);
-
+               .Property(l => l.ZipCode)
+               .IsRequired().HasMaxLength(10);
 
             modelBuilder.Entity<Location>()
                .Property(l => l.Country)
                .IsRequired().HasMaxLength(36);
 
             modelBuilder.Entity<Location>()
-               .Property(l => l.Number)
-               .IsRequired().HasMaxLength(36);
-
-            modelBuilder.Entity<Location>()
-               .Property(l => l.Street)
-               .IsRequired().HasMaxLength(36);
-
-            modelBuilder.Entity<Location>()
                 .HasMany<Pet>(l => l.Pets)
                 .WithOne(p => p.Location)
                 .HasForeignKey(p => p.LocationId);
+            modelBuilder.Entity<Location>()
+               .HasAlternateKey(l => new {l.ZipCode, l.Country })
+               .HasName("AlternateKey_Country_ZipCode");
 
 
-            Seed(modelBuilder);
         }
 
-        private void Seed(ModelBuilder modelBuilder)
-        {
-            Location loc = Location.Create("Romania", "Iasi", "Street", "1");
-            modelBuilder.Entity<Location>().HasData(
-                loc);
-            modelBuilder.Entity<Pet>().HasData(
-                Pet.Create("Otto", "dog", "male", "Cristian", "my dog is happy", loc.Id)
-                ) ;
-        }
     }
 }

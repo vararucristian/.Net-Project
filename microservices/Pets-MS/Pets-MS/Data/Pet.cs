@@ -14,15 +14,17 @@ namespace Pets_MS.Data
         public string Genre { get; private set; }
         public string Username { get; private set; }
         public string Description { get; private set; }
-        public Location Location { get; private set; }
+        public Location Location { get; set; }
+        public DateTime BirthDate { get; private set; }
         public Guid LocationId { get; private set; }
+
 
         private Pet()
         {
 
         }
 
-        public static Pet Create(string name, string species, string genre, string username, string description, Guid idLocation)
+        public static Pet Create(string name, string species, string genre, string username, string description, DateTime birthDate, Guid locationId)
         {
             return new Pet
             {
@@ -32,7 +34,9 @@ namespace Pets_MS.Data
                 Genre = genre,
                 Username = username,
                 Description = description,
-                LocationId = idLocation
+                BirthDate = birthDate,
+                LocationId= locationId 
+             
             };
         }
     }
