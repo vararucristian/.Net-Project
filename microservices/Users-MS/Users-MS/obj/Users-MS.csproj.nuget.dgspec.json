@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\FACULTATE\\Anul 3\\semestrul 1\\NET\\.Net-Project\\microservices\\Users-MS\\Users-MS\\Users-MS.csproj": {}
+    "C:\\Users\\mike\\Desktop\\.Net-Project\\microservices\\Users-MS\\Users-MS\\Users-MS.csproj": {}
   },
   "projects": {
-    "D:\\FACULTATE\\Anul 3\\semestrul 1\\NET\\.Net-Project\\microservices\\Users-MS\\Users-MS\\Users-MS.csproj": {
+    "C:\\Users\\mike\\Desktop\\.Net-Project\\microservices\\Users-MS\\Users-MS\\Users-MS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\FACULTATE\\Anul 3\\semestrul 1\\NET\\.Net-Project\\microservices\\Users-MS\\Users-MS\\Users-MS.csproj",
+        "projectUniqueName": "C:\\Users\\mike\\Desktop\\.Net-Project\\microservices\\Users-MS\\Users-MS\\Users-MS.csproj",
         "projectName": "Users-MS",
-        "projectPath": "D:\\FACULTATE\\Anul 3\\semestrul 1\\NET\\.Net-Project\\microservices\\Users-MS\\Users-MS\\Users-MS.csproj",
-        "packagesPath": "C:\\Users\\turcu\\.nuget\\packages\\",
-        "outputPath": "D:\\FACULTATE\\Anul 3\\semestrul 1\\NET\\.Net-Project\\microservices\\Users-MS\\Users-MS\\obj\\",
+        "projectPath": "C:\\Users\\mike\\Desktop\\.Net-Project\\microservices\\Users-MS\\Users-MS\\Users-MS.csproj",
+        "packagesPath": "C:\\Users\\mike\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mike\\Desktop\\.Net-Project\\microservices\\Users-MS\\Users-MS\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\turcu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mike\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

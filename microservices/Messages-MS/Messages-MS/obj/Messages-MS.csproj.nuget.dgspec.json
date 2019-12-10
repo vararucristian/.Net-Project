@@ -1,25 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Facultate\\.NET\\.Net-Project\\microservices\\Messages-MS\\Messages-MS\\Messages-MS.csproj": {}
+    "C:\\Users\\mike\\Desktop\\.Net-Project\\microservices\\Messages-MS\\Messages-MS\\Messages-MS.csproj": {}
   },
   "projects": {
-    "D:\\Facultate\\.NET\\.Net-Project\\microservices\\Messages-MS\\Messages-MS\\Messages-MS.csproj": {
+    "C:\\Users\\mike\\Desktop\\.Net-Project\\microservices\\Messages-MS\\Messages-MS\\Messages-MS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Facultate\\.NET\\.Net-Project\\microservices\\Messages-MS\\Messages-MS\\Messages-MS.csproj",
+        "projectUniqueName": "C:\\Users\\mike\\Desktop\\.Net-Project\\microservices\\Messages-MS\\Messages-MS\\Messages-MS.csproj",
         "projectName": "Messages-MS",
-        "projectPath": "D:\\Facultate\\.NET\\.Net-Project\\microservices\\Messages-MS\\Messages-MS\\Messages-MS.csproj",
-        "packagesPath": "C:\\Users\\Steve\\.nuget\\packages\\",
-        "outputPath": "D:\\Facultate\\.NET\\.Net-Project\\microservices\\Messages-MS\\Messages-MS\\obj\\",
+        "projectPath": "C:\\Users\\mike\\Desktop\\.Net-Project\\microservices\\Messages-MS\\Messages-MS\\Messages-MS.csproj",
+        "packagesPath": "C:\\Users\\mike\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mike\\Desktop\\.Net-Project\\microservices\\Messages-MS\\Messages-MS\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Steve\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\mike\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.0"
