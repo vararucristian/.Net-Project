@@ -9,7 +9,7 @@ using Users_Ms.Data;
 
 namespace Users_Ms.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/users")]
     [ApiController]
     public class UsersController : ControllerBase
     {
