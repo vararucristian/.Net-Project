@@ -1,0 +1,41 @@
+﻿@page  "/editperson/{Id}"
+@inject HttpClient Http
+@inject NavigationManager Navigator
+
+<h3>Edit Person</h3>
+<span class="oi oi-list-rich" aria-hidden="true">@person.Id</span>
+<input @bind="person.Age" placeholder="" />
+<input @bind="person.FirstName" placeholder="" />
+
+<button @onclick="@Save">Save</button>
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+
+    private string apiUrl = "http://localhost:5000/api/persons";
+    private Person person = new Person();
+
+    private void Save()
+    {
+        Http.PutJsonAsync(apiUrl, person);
+        Navigator.NavigateTo("/personsdata", true);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        person = await Http.GetJsonAsync<Person>(apiUrl + "/" + Id);
+    }
+
+    public class Person
+    {
+        public Guid Id { get; set; }
+
+        public string FirstName { get; set; }
+
+        public int Age { get; set; }
+
+    }
+
+}
+
