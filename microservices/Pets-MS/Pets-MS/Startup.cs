@@ -11,6 +11,7 @@ namespace Pets_Ms
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -21,11 +22,21 @@ namespace Pets_Ms
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                builder =>
+                {
+                    builder.AllowAnyHeader()
+                           .AllowAnyMethod()
+                           .AllowAnyOrigin();
+                });
+            });
             services.AddControllers();
 
             services.AddDbContext<PetContext>(options =>
                 options.UseSqlServer("Server=localhost;  Database=Pets;  Trusted_Connection=True;"));
-
+          
             services.AddMediatR(typeof(Startup).Assembly);
 
             services.AddControllers().AddNewtonsoftJson();
@@ -50,6 +61,7 @@ namespace Pets_Ms
             {
                 endpoints.MapControllers();
             });
+
         }
 
     }
