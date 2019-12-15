@@ -124,7 +124,6 @@ F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\bin\Debug\netcoreap
 F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\bin\Debug\netcoreapp3.0\Newtonsoft.Json.Bson.dll
 F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\bin\Debug\netcoreapp3.0\NLog.dll
-F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\obj\Debug\netcoreapp3.0\Users-MS.MvcApplicationPartsAssemblyInfo.cache
 D:\Facultate\.NET\.Net-Project\microservices\Users-MS\Users-MS\bin\Debug\netcoreapp3.0\appsettings.Development.json
 D:\Facultate\.NET\.Net-Project\microservices\Users-MS\Users-MS\bin\Debug\netcoreapp3.0\appsettings.json
 D:\Facultate\.NET\.Net-Project\microservices\Users-MS\Users-MS\bin\Debug\netcoreapp3.0\Properties\launchSettings.json
@@ -251,3 +250,8 @@ D:\Facultate\.NET\.Net-Project\microservices\Users-MS\Users-MS\obj\Debug\netcore
 D:\Facultate\.NET\.Net-Project\microservices\Users-MS\Users-MS\obj\Debug\netcoreapp3.0\Users-MS.csproj.CopyComplete
 D:\Facultate\.NET\.Net-Project\microservices\Users-MS\Users-MS\obj\Debug\netcoreapp3.0\Users-MS.dll
 D:\Facultate\.NET\.Net-Project\microservices\Users-MS\Users-MS\obj\Debug\netcoreapp3.0\Users-MS.pdb
+F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.JsonWebTokens.dll
+F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.Logging.dll
+F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.Tokens.dll
+F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\bin\Debug\netcoreapp3.0\System.IdentityModel.Tokens.Jwt.dll
+F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\obj\Debug\netcoreapp3.0\Users-MS.MvcApplicationPartsAssemblyInfo.cache

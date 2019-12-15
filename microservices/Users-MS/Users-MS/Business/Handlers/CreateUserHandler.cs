@@ -7,6 +7,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Users_Ms.Data;
 using Users_MS.DTO;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Users_MS.Business.Handlers
 {
@@ -41,7 +43,12 @@ namespace Users_MS.Business.Handlers
 
             }
 
-            var user = User.Create(request.FirstName, request.LastName, request.UserName, request.Email, request.Password, imagePath);
+            byte[] passwordBytes = Encoding.ASCII.GetBytes(request.Password);
+            SHA256 passwordSHA256 = SHA256.Create();
+            byte[] hashValue = passwordSHA256.ComputeHash(passwordBytes);
+            string passwordHash = BitConverter.ToString(hashValue);
+            passwordHash = passwordHash.Replace("-", "");
+            var user = User.Create(request.FirstName, request.LastName, request.UserName, request.Email, passwordHash, imagePath);
             try
             {
                 UserContext.Users.Add(user);

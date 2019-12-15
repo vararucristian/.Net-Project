@@ -1,6 +1,9 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Users_Ms.Business.Commands;
@@ -29,9 +32,12 @@ namespace Users_MS.Business.Handlers
             {
                 try
                 {
-
-                    user.Email = request.Email;
-                    user.Password = request.Password;
+                    byte[] passwordBytes = Encoding.ASCII.GetBytes(request.Password);
+                    SHA256 passwordSHA256 = SHA256.Create();
+                    byte[] hashValue = passwordSHA256.ComputeHash(passwordBytes);
+                    string passwordHash = BitConverter.ToString(hashValue);
+                    passwordHash = passwordHash.Replace("-", ""); user.Email = request.Email;
+                    user.Password = passwordHash;
                     user.FirstName = request.FirstName;
                     user.LastName = request.LastName;
                     UserContext.SaveChanges();

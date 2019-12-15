@@ -82,6 +82,23 @@ namespace Users_Ms.Controllers
             }
         }
 
+        [Route("authenticate")]
+        [HttpPost("authenticate")]
+        public async Task<ActionResult<string>> Authenticate([FromBody]AuthenticateUser jsonRequest)
+        {
+
+            var response = await _mediator.Send(jsonRequest);
+            var json = JsonSerializer.Serialize(response);
+            if (response["succes"].Equals(false))
+            {
+                return BadRequest(json);
+            }
+            else
+            {
+                return json;
+            }
+        }
+
 
         [HttpPut]
         public async Task<ActionResult<string>> Update([FromBody]UPdateUser jsonRequest)

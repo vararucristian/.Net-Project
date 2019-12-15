@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -20,7 +23,12 @@ namespace Users_MS.Business.Handlers
         {
             var response = new Dictionary<string, object>();
             var users = UserContext.Users;
-            var user = users.Where(u => u.UserName == request.UserName && u.Password == request.Password).FirstOrDefault();
+            byte[] passwordBytes = Encoding.ASCII.GetBytes(request.Password);
+            SHA256 passwordSHA256 = SHA256.Create();
+            byte[] hashValue = passwordSHA256.ComputeHash(passwordBytes);
+            string passwordHash = BitConverter.ToString(hashValue);
+            passwordHash = passwordHash.Replace("-", "");
+            var user = users.Where(u => u.UserName == request.UserName && u.Password == passwordHash).FirstOrDefault();
             if (user == null)
             {
                 response.Add("succes", false);
