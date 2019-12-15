@@ -9,7 +9,8 @@
         "Get",
         "Post",
         "Put",
-        "Delete"
+        "Delete",
+        "Options"
       ],
       "DownstreamPathTemplate": "/api/{path}",
       "DownstreamScheme": "https",

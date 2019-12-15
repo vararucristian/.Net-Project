@@ -1,18 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mike\\Desktop\\.Net-Project\\Front\\FrontEnd\\FrontEnd.csproj": {}
+    "C:\\Users\\mike\\Desktop\\.Net-Project\\Frontend\\FrontEnd\\FrontEnd.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mike\\Desktop\\.Net-Project\\Front\\FrontEnd\\FrontEnd.csproj": {
+    "C:\\Users\\mike\\Desktop\\.Net-Project\\Frontend\\FrontEnd\\FrontEnd.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mike\\Desktop\\.Net-Project\\Front\\FrontEnd\\FrontEnd.csproj",
+        "projectUniqueName": "C:\\Users\\mike\\Desktop\\.Net-Project\\Frontend\\FrontEnd\\FrontEnd.csproj",
         "projectName": "FrontEnd",
-        "projectPath": "C:\\Users\\mike\\Desktop\\.Net-Project\\Front\\FrontEnd\\FrontEnd.csproj",
+        "projectPath": "C:\\Users\\mike\\Desktop\\.Net-Project\\Frontend\\FrontEnd\\FrontEnd.csproj",
         "packagesPath": "C:\\Users\\mike\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mike\\Desktop\\.Net-Project\\Front\\FrontEnd\\obj\\",
+        "outputPath": "C:\\Users\\mike\\Desktop\\.Net-Project\\Frontend\\FrontEnd\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
           "C:\\Users\\mike\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
