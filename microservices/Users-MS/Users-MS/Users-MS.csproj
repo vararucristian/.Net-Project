@@ -24,6 +24,14 @@
     <Compile Remove="Migrations\20191207095741_unique.Designer.cs" />
     <Compile Remove="Migrations\20191207100754_Initial-Migration.cs" />
     <Compile Remove="Migrations\20191207100754_Initial-Migration.Designer.cs" />
+    <Compile Remove="Migrations\20191207101559_Initial-Migration.cs" />
+    <Compile Remove="Migrations\20191207101559_Initial-Migration.Designer.cs" />
+    <Compile Remove="Migrations\20191214102601_Image-Column.cs" />
+    <Compile Remove="Migrations\20191214102601_Image-Column.Designer.cs" />
+    <Compile Remove="Migrations\20191214103415_Image-Column.cs" />
+    <Compile Remove="Migrations\20191214103415_Image-Column.Designer.cs" />
+    <Compile Remove="Migrations\20191214103612_Image-Column.cs" />
+    <Compile Remove="Migrations\20191214103612_Image-Column.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

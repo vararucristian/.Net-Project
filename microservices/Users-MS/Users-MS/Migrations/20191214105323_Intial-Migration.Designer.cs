@@ -10,8 +10,8 @@ using Users_Ms.Data;
 namespace Users_MS.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20191207101559_Initial-Migration")]
-    partial class InitialMigration
+    [Migration("20191214105323_Intial-Migration")]
+    partial class IntialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,6 +37,10 @@ namespace Users_MS.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
 
                     b.Property<string>("LastName")
                         .IsRequired()

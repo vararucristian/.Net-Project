@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Users_MS.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class IntialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,7 +16,8 @@ namespace Users_MS.Migrations
                     LastName = table.Column<string>(maxLength: 20, nullable: false),
                     UserName = table.Column<string>(maxLength: 20, nullable: false),
                     Email = table.Column<string>(maxLength: 40, nullable: false),
-                    Password = table.Column<string>(maxLength: 50, nullable: false)
+                    Password = table.Column<string>(maxLength: 50, nullable: false),
+                    ImagePath = table.Column<string>(maxLength: 200, nullable: true)
                 },
                 constraints: table =>
                 {
