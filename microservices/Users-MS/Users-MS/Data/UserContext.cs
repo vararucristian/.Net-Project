@@ -54,8 +54,12 @@ namespace Users_Ms.Data
 
             modelBuilder.Entity<User>()
                 .Property(u => u.Password)
-                .IsRequired().HasMaxLength(50);
+                .IsRequired().HasMaxLength(64);
 
+            modelBuilder.Entity<User>()
+                .Property(u => u.ImagePath)
+                .HasMaxLength(200);
+        
         }
 
 

@@ -8366,25 +8366,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Steve\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\varar\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Facultate\\.NET\\.Net-Project\\microservices\\Messages-MS\\Messages-MS\\Messages-MS.csproj",
+      "projectUniqueName": "F:\\.Net\\Project\\.Net-Project\\microservices\\Messages-MS\\Messages-MS\\Messages-MS.csproj",
       "projectName": "Messages-MS",
-      "projectPath": "D:\\Facultate\\.NET\\.Net-Project\\microservices\\Messages-MS\\Messages-MS\\Messages-MS.csproj",
-      "packagesPath": "C:\\Users\\Steve\\.nuget\\packages\\",
-      "outputPath": "D:\\Facultate\\.NET\\.Net-Project\\microservices\\Messages-MS\\Messages-MS\\obj\\",
+      "projectPath": "F:\\.Net\\Project\\.Net-Project\\microservices\\Messages-MS\\Messages-MS\\Messages-MS.csproj",
+      "packagesPath": "C:\\Users\\varar\\.nuget\\packages\\",
+      "outputPath": "F:\\.Net\\Project\\.Net-Project\\microservices\\Messages-MS\\Messages-MS\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Steve\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\varar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.0"

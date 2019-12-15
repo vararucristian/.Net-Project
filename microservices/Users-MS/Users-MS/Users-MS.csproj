@@ -24,6 +24,16 @@
     <Compile Remove="Migrations\20191207095741_unique.Designer.cs" />
     <Compile Remove="Migrations\20191207100754_Initial-Migration.cs" />
     <Compile Remove="Migrations\20191207100754_Initial-Migration.Designer.cs" />
+    <Compile Remove="Migrations\20191207101559_Initial-Migration.cs" />
+    <Compile Remove="Migrations\20191207101559_Initial-Migration.Designer.cs" />
+    <Compile Remove="Migrations\20191214102601_Image-Column.cs" />
+    <Compile Remove="Migrations\20191214102601_Image-Column.Designer.cs" />
+    <Compile Remove="Migrations\20191214103415_Image-Column.cs" />
+    <Compile Remove="Migrations\20191214103415_Image-Column.Designer.cs" />
+    <Compile Remove="Migrations\20191214103612_Image-Column.cs" />
+    <Compile Remove="Migrations\20191214103612_Image-Column.Designer.cs" />
+    <Compile Remove="Migrations\20191215180035_change_password_length.cs" />
+    <Compile Remove="Migrations\20191215180035_change_password_length.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,6 +49,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
     <PackageReference Include="NLog" Version="4.6.8" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.6.0" />
   </ItemGroup>
 
   <ItemGroup>

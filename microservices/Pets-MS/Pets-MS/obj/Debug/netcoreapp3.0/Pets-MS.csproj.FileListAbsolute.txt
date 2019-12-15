@@ -249,3 +249,6 @@ D:\FACULTATE\Anul 3\semestrul 1\NET\.Net-Project\microservices\Pets-MS\Pets-MS\o
 D:\FACULTATE\Anul 3\semestrul 1\NET\.Net-Project\microservices\Pets-MS\Pets-MS\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.JsonPatch.dll
 D:\FACULTATE\Anul 3\semestrul 1\NET\.Net-Project\microservices\Pets-MS\Pets-MS\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 D:\FACULTATE\Anul 3\semestrul 1\NET\.Net-Project\microservices\Pets-MS\Pets-MS\bin\Debug\netcoreapp3.0\Newtonsoft.Json.Bson.dll
+F:\.Net\Project\.Net-Project\microservices\Pets-MS\Pets-MS\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.JsonPatch.dll
+F:\.Net\Project\.Net-Project\microservices\Pets-MS\Pets-MS\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+F:\.Net\Project\.Net-Project\microservices\Pets-MS\Pets-MS\bin\Debug\netcoreapp3.0\Newtonsoft.Json.Bson.dll
