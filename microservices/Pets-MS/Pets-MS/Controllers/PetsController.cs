@@ -25,7 +25,14 @@ namespace Pets_MS.Controllers
         {
             var response = await _mediator.Send(new GetPetsQuery());
             var json = JsonSerializer.Serialize(response);
-            return json;
+            if (response.Count==0)
+            {
+                return NotFound(json);
+            }
+            else
+            {
+                return Ok(json);
+            }
         }
 
         [HttpPost]
@@ -40,9 +47,10 @@ namespace Pets_MS.Controllers
             }
             else
             {
-                return json;
+                return Ok(json);
             }
         }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<string>> GetPetsByIdAsync(Guid id)
         {
@@ -50,9 +58,71 @@ namespace Pets_MS.Controllers
             var json = JsonSerializer.Serialize(response);
             if (response["succes"].Equals(false))
             {
-                return BadRequest(json);
+                return NotFound(json);
             }
             return json;
+        }
+
+        [HttpGet("username/{username}")]
+        public async Task<ActionResult<string>> GetPetsByUsernameAsync(String username)
+        {
+            var response = await _mediator.Send(new GetPetsByUsernameQuery(username));
+            var json = JsonSerializer.Serialize(response);
+            if (response.Count == 0)
+            {
+                return NotFound(json);
+            }
+            else
+            {
+                return Ok(json);
+            }
+        }
+
+        [HttpGet("species/{species}")]
+        public async Task<ActionResult<string>> GetPetsBySpeciesAsync(Animal species)
+        {
+            var response = await _mediator.Send(new GetPetsBySpeciesQuery(species));
+            var json = JsonSerializer.Serialize(response);
+            if (response.Count == 0)
+            {
+                return NotFound(json);
+            }
+            else
+            {
+                return Ok(json);
+            }
+        }
+
+        [HttpGet("{latitude}/{longitude}")]
+        public async Task<ActionResult<string>> GetPetsByLocationAsync(double latitude, double longitude)
+        {
+            var response = await _mediator.Send(new GetPetsByLocationQuery(latitude, longitude));
+            var json = JsonSerializer.Serialize(response);
+            if (response.Count == 0)
+            {
+                return NotFound(json);
+            }
+            else
+            {
+                return Ok(json);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<string>> Delete(Guid id)
+        {
+            var response = await _mediator.Send(new DeletePet(id));
+            var json = JsonSerializer.Serialize(response);
+            if (response["succes"].Equals(false))
+            {
+                return BadRequest(json);
+            }
+            else
+            {
+                return Ok(json);
+            }
+
+
         }
     }
 }

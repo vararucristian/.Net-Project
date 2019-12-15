@@ -20,18 +20,15 @@ namespace Pets_MS.Business.Handlers
 
         public async Task<List<Dictionary<string, object>>> Handle(GetPetsQuery request, CancellationToken cancellationToken)
         {
-
             var response =new List<Dictionary<string, object>>();
-
-            foreach (Pet pet in PetContext.Pets.ToList())
+            var pets = PetContext.Pets.ToList();
+            foreach (Pet pet in pets)
             {
                 var entity = new Dictionary<string, object>();
-                var location = PetContext.Locations.Where(l => l.Id == pet.LocationId).Select(l => new {l.ZipCode, l.Country }).FirstOrDefault();
+                var location = PetContext.Locations.Where(l => l.Id == pet.LocationId).Select(l => Coordinate.Create(l.Latitude, l.Longitude)).FirstOrDefault();
                 entity.Add("pet", pet);
-                 
                 entity.Add("location", location);
                 response.Add(entity);
-
             }
             return response;
         }

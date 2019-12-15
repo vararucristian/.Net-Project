@@ -10,8 +10,8 @@ using Pets_MS.Data;
 namespace Pets_MS.Migrations
 {
     [DbContext(typeof(PetContext))]
-    [Migration("20191208200711_m8")]
-    partial class m8
+    [Migration("20191215212147_i1")]
+    partial class i1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,20 +28,16 @@ namespace Pets_MS.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasMaxLength(36);
 
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(36)")
-                        .HasMaxLength(36);
+                    b.Property<double>("Latitude")
+                        .HasColumnType("float");
 
-                    b.Property<string>("ZipCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(10)")
-                        .HasMaxLength(10);
+                    b.Property<double>("Longitude")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
-                    b.HasAlternateKey("ZipCode", "Country")
-                        .HasName("AlternateKey_Country_ZipCode");
+                    b.HasAlternateKey("Latitude", "Longitude")
+                        .HasName("AlternateKey_Latitude_Longitude");
 
                     b.ToTable("Locations");
                 });
@@ -61,9 +57,8 @@ namespace Pets_MS.Migrations
                         .HasColumnType("nvarchar(36)")
                         .HasMaxLength(36);
 
-                    b.Property<string>("Genre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(36)")
+                    b.Property<int>("Genre")
+                        .HasColumnType("int")
                         .HasMaxLength(36);
 
                     b.Property<Guid>("LocationId")
@@ -74,9 +69,8 @@ namespace Pets_MS.Migrations
                         .HasColumnType("nvarchar(36)")
                         .HasMaxLength(36);
 
-                    b.Property<string>("Species")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(36)")
+                    b.Property<int>("Species")
+                        .HasColumnType("int")
                         .HasMaxLength(36);
 
                     b.Property<string>("Username")

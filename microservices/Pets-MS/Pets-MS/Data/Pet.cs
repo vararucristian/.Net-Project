@@ -3,6 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+public enum Gen
+{
+    Male,
+    Female
+}
+
+public enum Animal
+{
+    Dog,
+    Cat,
+    Fish,
+    Turtle,
+    Rabbit,
+    Parrot,
+    Hamster
+}
+
 namespace Pets_MS.Data
 {
     public class Pet
@@ -10,8 +27,8 @@ namespace Pets_MS.Data
         public Guid Id { get; private set; }
 
         public string Name { get; private set; }
-        public string Species { get; private set; }
-        public string Genre { get; private set; }
+        public Animal Species { get; private set; }
+        public Gen Genre { get; private set; }
         public string Username { get; private set; }
         public string Description { get; private set; }
         public Location Location { get; set; }
@@ -24,7 +41,7 @@ namespace Pets_MS.Data
 
         }
 
-        public static Pet Create(string name, string species, string genre, string username, string description, DateTime birthDate, Guid locationId)
+        public static Pet Create(string name, Animal species, Gen genre, string username, string description, DateTime birthDate, Guid locationId)
         {
             return new Pet
             {
