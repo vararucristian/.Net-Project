@@ -254,4 +254,7 @@ F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\bin\Debug\netcoreap
 F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.Logging.dll
 F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.Tokens.dll
 F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\bin\Debug\netcoreapp3.0\System.IdentityModel.Tokens.Jwt.dll
+F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.Protocols.dll
+F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 F:\.Net\Project\.Net-Project\microservices\Users-MS\Users-MS\obj\Debug\netcoreapp3.0\Users-MS.MvcApplicationPartsAssemblyInfo.cache
