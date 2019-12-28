@@ -15,6 +15,8 @@ namespace Users_MS.DTO
 
         public string Password { get;  set; }
 
+        public string ConfirmPassword { get; set; }
+
         public string ImageData { get; set; }
             
             

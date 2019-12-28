@@ -6,6 +6,7 @@ using System.Text.Json;
 using System;
 using Users_MS.DTO;
 using Users_Ms.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Users_Ms.Controllers
 {
@@ -54,10 +55,12 @@ namespace Users_Ms.Controllers
         }
 
 
+
+
         [HttpGet("{userName}/{password}")]
-        public async Task<ActionResult<string>> GetUsersByUserNameAndPassword(string userName, string password)
+        public async Task<ActionResult<string>> Authorize(string userName, string password)
         {
-            var response = await _mediator.Send(new GetUserByUsernameAndPasswordQuery(userName, password));
+            var response = await _mediator.Send(new AuthenticateUserQuery(userName, password));
             var json = JsonSerializer.Serialize(response);
             if (response["succes"].Equals(false))
             {
@@ -82,23 +85,14 @@ namespace Users_Ms.Controllers
             }
         }
 
-        [Route("authenticate")]
-        [HttpPost("authenticate")]
-        public async Task<ActionResult<string>> Authenticate([FromBody]AuthenticateUser jsonRequest)
+
+        [Authorize]
+        [Route("authentificate")]
+        [HttpPost("/authentificate")]
+        public string authorize()
         {
-
-            var response = await _mediator.Send(jsonRequest);
-            var json = JsonSerializer.Serialize(response);
-            if (response["succes"].Equals(false))
-            {
-                return BadRequest(json);
-            }
-            else
-            {
-                return json;
-            }
+            return "True";
         }
-
 
         [HttpPut]
         public async Task<ActionResult<string>> Update([FromBody]UPdateUser jsonRequest)

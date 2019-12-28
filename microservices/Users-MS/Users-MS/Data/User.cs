@@ -17,6 +17,8 @@ namespace Users_Ms.Data
         public string Password { get; set; }
 
         public string ImagePath { get; set; }
+
+
         private User()
         {
 
