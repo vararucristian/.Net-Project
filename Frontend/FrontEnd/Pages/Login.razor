@@ -2,6 +2,7 @@
 @layout BasicLayout
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
+@inject ILocalStorageService LocalStorage
 <!-- Container -->
 <div class="container mx-auto">
     <div class="flex justify-center px-6 my-12">
@@ -74,8 +75,37 @@
     private async void LoginUser()
     {
 
-        await Http.GetStringAsync(apiUrl+$"{userName}/{password}/");
+        var response = await Http.GetJsonAsync<LoginResponse>(apiUrl+$"{userName}/{password}/");
+        if(response.succes)
+        {
+            await LocalStorage.SetItemAsync("token", response.Token);
+            await LocalStorage.SetItemAsync("id", response.user.Id);
+            if (!Http.DefaultRequestHeaders.Contains("Authorization"))
+            {
+                var token = await LocalStorage.GetItemAsync<string>("token");
+                Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            }
+            await Http.GetAsync($"{apiUrl}authentificate");
+            //NavigationManager.NavigateTo("/");
+        }
 
-        NavigationManager.NavigateTo("/");
+        //NavigationManager.NavigateTo("/");
+    }
+    public class User
+    {
+        public string Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public object ImagePath { get; set; }
+    }
+
+    public class LoginResponse
+    {
+        public string Token { get; set; }
+        public bool succes { get; set; }
+        public User user { get; set; }
     }
 }

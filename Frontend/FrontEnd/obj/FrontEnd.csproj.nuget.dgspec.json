@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "F:\\.Net\\Project\\.Net-Project\\Frontend\\FrontEnd\\FrontEnd.csproj": {}
+    "C:\\Users\\mike\\Desktop\\.Net-Project\\Frontend\\FrontEnd\\FrontEnd.csproj": {}
   },
   "projects": {
-    "F:\\.Net\\Project\\.Net-Project\\Frontend\\FrontEnd\\FrontEnd.csproj": {
+    "C:\\Users\\mike\\Desktop\\.Net-Project\\Frontend\\FrontEnd\\FrontEnd.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\.Net\\Project\\.Net-Project\\Frontend\\FrontEnd\\FrontEnd.csproj",
+        "projectUniqueName": "C:\\Users\\mike\\Desktop\\.Net-Project\\Frontend\\FrontEnd\\FrontEnd.csproj",
         "projectName": "FrontEnd",
-        "projectPath": "F:\\.Net\\Project\\.Net-Project\\Frontend\\FrontEnd\\FrontEnd.csproj",
-        "packagesPath": "C:\\Users\\varar\\.nuget\\packages\\",
-        "outputPath": "F:\\.Net\\Project\\.Net-Project\\Frontend\\FrontEnd\\obj\\",
+        "projectPath": "C:\\Users\\mike\\Desktop\\.Net-Project\\Frontend\\FrontEnd\\FrontEnd.csproj",
+        "packagesPath": "C:\\Users\\mike\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mike\\Desktop\\.Net-Project\\Frontend\\FrontEnd\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\varar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mike\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -38,6 +41,14 @@
       "frameworks": {
         "netstandard2.0": {
           "dependencies": {
+            "Blazored.LocalStorage": {
+              "target": "Package",
+              "version": "[2.1.1, )"
+            },
+            "MediaBrowser.ApiClient": {
+              "target": "Package",
+              "version": "[3.1.0, )"
+            },
             "Microsoft.AspNetCore.Blazor": {
               "target": "Package",
               "version": "[3.1.0-preview3.19555.2, )"

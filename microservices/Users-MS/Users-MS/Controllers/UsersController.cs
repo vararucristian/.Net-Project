@@ -77,7 +77,7 @@ namespace Users_Ms.Controllers
             var json = JsonSerializer.Serialize(response);
             if (response["succes"].Equals(false))
             {
-                return BadRequest(json);
+                return json;
             }
             else
             {
