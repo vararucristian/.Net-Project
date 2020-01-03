@@ -116,7 +116,7 @@ namespace Users_MS.Business.Handlers
             }
         }
 
-        private string  saveImage(CreateUser request)
+        private string saveImage(CreateUser request)
         {
             string imagePath = "UsersImages\\" + request.UserName + ".jpg";
             var imageDataByteArray = Convert.FromBase64String(request.ImageData);
