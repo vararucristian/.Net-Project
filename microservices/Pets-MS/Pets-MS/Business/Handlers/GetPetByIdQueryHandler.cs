@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Pets_Ms.Business.Commands;
+using System;
 
 namespace Pets_MS.Business.Handlers
 {
@@ -21,18 +22,21 @@ namespace Pets_MS.Business.Handlers
 
             var response = new Dictionary<string, object>();
             var pets = PetContext.Pets;
-            var pet = pets.Where(u => u.Id == request.Id).FirstOrDefault();
-            var location = PetContext.Locations.Where(l => l.Id == pet.LocationId).Select(l  => new { l.ZipCode, l.Country }).FirstOrDefault();
-            if (pet == null)
+            var pet = pets.Where(p => p.Id == request.Id).FirstOrDefault();
+            try 
+            { 
+                var location = PetContext.Locations.Where(l => l.Id == pet.LocationId).Select(l  => Coordinate.Create(l.Latitude, l.Longitude)).FirstOrDefault();
+                response.Add("pet", pet);
+                response.Add("location", location);
+            }
+            catch (InvalidOperationException) 
             {
                 response.Add("succes", false);
             }
-            else
+            if (pet != null)  
             {
                 response.Add("succes", true);
             }
-            response.Add("pet", pet);
-            response.Add("location", location);
             return response;
         }
     }

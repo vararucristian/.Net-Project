@@ -60,20 +60,20 @@ namespace Pets_MS.Data
                .IsRequired().HasMaxLength(36);
 
             modelBuilder.Entity<Location>()
-               .Property(l => l.ZipCode)
-               .IsRequired().HasMaxLength(10);
+               .Property(l => l.Latitude)
+               .IsRequired();
 
             modelBuilder.Entity<Location>()
-               .Property(l => l.Country)
-               .IsRequired().HasMaxLength(36);
+               .Property(l => l.Longitude)
+               .IsRequired();
 
             modelBuilder.Entity<Location>()
                 .HasMany<Pet>(l => l.Pets)
                 .WithOne(p => p.Location)
                 .HasForeignKey(p => p.LocationId);
             modelBuilder.Entity<Location>()
-               .HasAlternateKey(l => new {l.ZipCode, l.Country })
-               .HasName("AlternateKey_Country_ZipCode");
+               .HasAlternateKey(l => new {l.Latitude, l.Longitude })
+               .HasName("AlternateKey_Latitude_Longitude");
 
 
         }

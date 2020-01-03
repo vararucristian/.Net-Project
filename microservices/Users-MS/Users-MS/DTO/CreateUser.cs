@@ -15,14 +15,11 @@ namespace Users_MS.DTO
 
         public string Password { get;  set; }
 
-/*        public CreateUser(string firstName,string lastName,string userName,string email , string password)
-        {
-            FirstName = firstName;
-            LastName = lastName;
-            UserName = userName;
-            Email = email;
-            Password = password;
-        }*/
+        public string ConfirmPassword { get; set; }
+
+        public string ImageData { get; set; }
+            
+            
 
     }
 }

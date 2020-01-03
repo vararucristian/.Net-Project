@@ -8,8 +8,8 @@ namespace Pets_MS.Data
     public class Location
     {
         public Guid Id { get; private set; }
-        public string Country { get; private set; }
-        public string ZipCode { get; private set; }
+        public double Latitude { get; private set; }
+        public double Longitude { get; private set; }
         public ICollection<Pet> Pets { get; private set; }
 
         private Location()
@@ -17,13 +17,13 @@ namespace Pets_MS.Data
 
         }
 
-        public static Location Create(string country, string zipCode)
+        public static Location Create(double latitude, double longitude)
         {
             return new Location
             {
                 Id = Guid.NewGuid(),
-                Country = country,
-                ZipCode= zipCode
+                Latitude = latitude,
+                Longitude= longitude
             };
         }
     }

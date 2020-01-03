@@ -6,6 +6,9 @@ using Microsoft.Extensions.Hosting;
 using MediatR;
 using Users_Ms.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Users_MS.Share;
 
 namespace Users_Ms
 {
@@ -22,11 +25,19 @@ namespace Users_Ms
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.ConfigureJwtAuthentication(Configuration);
+
+            services.AddSingleton<IConfiguration>(Configuration);
+
+            services.AddAuthorization(options =>
+            {
+                options.DefaultPolicy = new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme).RequireAuthenticatedUser().Build();
+            });
             services.AddCors();
             services.AddControllers();
-
+            string connectionString = Configuration.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value;
             services.AddDbContext<UserContext>(options =>
-                options.UseSqlServer("Server=localhost;  Database=Users;  Trusted_Connection=True;"));
+                options.UseSqlServer(connectionString));
 
             services.AddMediatR(typeof(Startup).Assembly);
 

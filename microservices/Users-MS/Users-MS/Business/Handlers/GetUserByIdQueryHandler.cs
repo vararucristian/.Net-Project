@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System;
 
 namespace Users_Ms.Business.Handlers
 {
@@ -30,7 +31,12 @@ namespace Users_Ms.Business.Handlers
             {
                 response.Add("succes", true);
             }
+
+            byte[] imageArray = System.IO.File.ReadAllBytes(user.ImagePath);
+            string base64ImageRepresentation = Convert.ToBase64String(imageArray);
             response.Add("user", user);
+            response.Add("imageData", base64ImageRepresentation);
+
             return response;
         }
     }

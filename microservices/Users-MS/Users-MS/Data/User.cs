@@ -16,12 +16,15 @@ namespace Users_Ms.Data
 
         public string Password { get; set; }
 
+        public string ImagePath { get; set; }
+
+
         private User()
         {
 
         }
 
-        public static User Create(string firstName, string lastName, string userName, string email, string password)
+        public static User Create(string firstName, string lastName, string userName, string email, string password, string imagePath)
         {
             return new User
             {
@@ -30,7 +33,8 @@ namespace Users_Ms.Data
                 LastName = lastName,
                 UserName = userName,
                 Email = email,
-                Password = password
+                Password = password,
+                ImagePath = imagePath
 
             };
         }
