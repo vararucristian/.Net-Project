@@ -86,6 +86,12 @@
                     </div>
                     <hr class="mb-6 border-t" />
                     <div class="text-center">
+                        @if(response != null && response.succes == false)
+                        {
+                            <span class="small form-text text-danger">@response.error_message</span>
+                        }
+                    </div>
+                    <div class="text-center">
                         <a class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
                            href="./forgot-password-page.html">
                             Forgot Password?
@@ -114,6 +120,7 @@
     string email;
     string password;
     string password2;
+    CreateAccountResponse response = null;
     private async void AddAccount()
     {
         if (password != password2)
@@ -123,13 +130,16 @@
             LastName = lastName,
             UserName = userName,
             Email = email,
-            Password = password
+            Password = password,
+            ConfirmPassword = password2,
 
         };
-    
-        await Http.PostJsonAsync(apiUrl, account);
 
-        NavigationManager.NavigateTo("/login");
+        response = await Http.PostJsonAsync<CreateAccountResponse>(apiUrl, account);
+        
+       // response = JsonSerializer.Deserialize<CreateAccountResponse>(responseText);
+        if(response.succes)
+            NavigationManager.NavigateTo("/login");
     }
 
     public class CreateAccount
@@ -143,5 +153,26 @@
         public string Email { get;  set; }
 
         public string Password { get;  set; }
+         public string ConfirmPassword { get; set; }
     }
+
+    public class User
+    {
+        public string Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public object ImagePath { get; set; }
+    }
+
+    public class CreateAccountResponse
+    {
+        public bool succes { get; set; }
+        public User user { get; set; }
+        public string error_message { get; set; }
+    }
+
+
 }

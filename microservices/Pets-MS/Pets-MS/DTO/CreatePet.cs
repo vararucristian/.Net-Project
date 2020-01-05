@@ -17,6 +17,7 @@ namespace Pets_MS.DTO
         public DateTime BirthDate { get;  set; }
         public double Latitude { get;  set; }
         public double Longitude { get;  set; }
+        public string ImageData { get; set; }
 
     }
 }

@@ -1,3 +1,4 @@
+Blazored.LocalStorage.dll
 BlazorPersonsApp.dll
 Microsoft.AspNetCore.Authorization.dll
 Microsoft.AspNetCore.Blazor.dll
