@@ -8690,5 +8690,13 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file D:\\FACULTATE\\Anul 3\\semestrul 1\\NET\\.Net-Project\\microservices\\Users-MS\\Users-MS\\obj\\Users-MS.csproj.nuget.cache : Value cannot be null.\r\nParameter name: value"
+    }
+  ]
 }

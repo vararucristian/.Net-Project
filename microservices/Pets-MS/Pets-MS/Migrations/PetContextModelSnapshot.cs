@@ -59,6 +59,10 @@ namespace Pets_MS.Migrations
                         .HasColumnType("int")
                         .HasMaxLength(36);
 
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
+
                     b.Property<Guid>("LocationId")
                         .HasColumnType("uniqueidentifier");
 

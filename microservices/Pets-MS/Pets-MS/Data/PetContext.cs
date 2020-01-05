@@ -53,6 +53,10 @@ namespace Pets_MS.Data
                  .HasOne<Location>(p => p.Location)
                  .WithMany(l => l.Pets);
 
+            modelBuilder.Entity<Pet>()
+                .Property(u => u.ImagePath)
+                .HasMaxLength(200);
+
             modelBuilder.Entity<Location>().HasKey(l => l.Id);
 
             modelBuilder.Entity<Location>()
@@ -74,6 +78,7 @@ namespace Pets_MS.Data
             modelBuilder.Entity<Location>()
                .HasAlternateKey(l => new {l.Latitude, l.Longitude })
                .HasName("AlternateKey_Latitude_Longitude");
+
 
 
         }

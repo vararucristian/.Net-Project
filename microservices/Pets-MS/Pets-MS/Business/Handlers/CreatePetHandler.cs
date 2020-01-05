@@ -7,9 +7,7 @@ using Pets_MS.Data;
 using Pets_MS.DTO;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-
-
-
+using System.IO;
 
 namespace Users_MS.Business.Handlers
 {
@@ -25,9 +23,18 @@ namespace Users_MS.Business.Handlers
 
         public async Task<Dictionary<string, object>> Handle(CreatePet request, CancellationToken cancellationToken)
         {
+            
             bool succes = true;
             var response = new Dictionary<string, object>();
             Guid locationID;
+            string imagePath = null;
+            Guid id =  Guid.NewGuid();
+            if (request.ImageData != null)
+            {
+                imagePath = saveImage(request, id);
+
+            }
+
             var location = Location.Create(request.Latitude, request.Longitude);
             try
             {
@@ -43,7 +50,7 @@ namespace Users_MS.Business.Handlers
             }
             try
             {
-                var pet = Pet.Create(request.Name, request.Species, request.Genre, request.Username, request.Description, request.BirthDate, locationID);
+                var pet = Pet.Create(id, request.Name, request.Species, request.Genre, request.Username, request.Description, request.BirthDate, locationID, imagePath);
                 PetContext.Pets.Add(pet);
                 await PetContext.SaveChangesAsync(cancellationToken);
             }
@@ -56,5 +63,18 @@ namespace Users_MS.Business.Handlers
             return response;
 
             }
+        private string saveImage(CreatePet request, Guid  id)
+        {
+            string imagePath = "PetsImages\\" + id + ".jpg";
+            var imageDataByteArray = Convert.FromBase64String(request.ImageData);
+            var imageDateStream = new MemoryStream(imageDataByteArray);
+            imageDateStream.Position = 0;
+            FileStream file = new FileStream(imagePath, FileMode.Create, FileAccess.Write);
+            imageDateStream.WriteTo(file);
+            imagePath = Path.GetFullPath(imagePath);
+            file.Close();
+            imageDateStream.Close();
+            return imagePath;
+        }
     }
 }

@@ -34,6 +34,7 @@ namespace Pets_MS.Data
         public Location Location { get; set; }
         public DateTime BirthDate { get; private set; }
         public Guid LocationId { get; private set; }
+        public string ImagePath { get; set; }
 
 
         private Pet()
@@ -41,19 +42,20 @@ namespace Pets_MS.Data
 
         }
 
-        public static Pet Create(string name, Animal species, Gen genre, string username, string description, DateTime birthDate, Guid locationId)
+        public static Pet Create(Guid id, string name, Animal species, Gen genre, string username, string description, DateTime birthDate, Guid locationId, string imagePath)
         {
             return new Pet
             {
-                Id = Guid.NewGuid(),
+                Id = id,
                 Name = name,
                 Species = species,
                 Genre = genre,
                 Username = username,
                 Description = description,
                 BirthDate = birthDate,
-                LocationId= locationId 
-             
+                LocationId= locationId,
+                ImagePath = imagePath
+
             };
         }
     }
