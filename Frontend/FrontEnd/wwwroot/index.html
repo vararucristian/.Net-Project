@@ -14,7 +14,7 @@
     <link href="css/site.css" rel="stylesheet" />
 </head>
 
-<body style="background: #edf2f7;">
+<body style="background: #edf2f7;" class="overflow-scroll">
     <app>Loading...</app>
 
     <div id="blazor-error-ui">
@@ -23,6 +23,14 @@
         <a class="dismiss">🗙</a>
     </div>
     <script src="_framework/blazor.webassembly.js"></script>
+    <script>
+        //Javascript to toggle the menu
+        document.getElementById('nav-toggle').onclick = function () {
+            document.getElementById("nav-content").classList.toggle("hidden");
+        }
+    </script>
+
+    <script src="Location.js"></script>
 </body>
 
 </html>

@@ -53,11 +53,7 @@
           "Host": "localhost",
           "Port": 5020
         }
-      ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "TestKey",
-        "AllowedScopes": []
-      }
+      ]
     },
     {
       "UpstreamPathTemplate": "/api/messages{path}",
