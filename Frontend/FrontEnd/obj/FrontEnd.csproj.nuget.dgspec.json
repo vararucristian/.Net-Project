@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mike\\Desktop\\.Net-Project\\Frontend\\FrontEnd\\FrontEnd.csproj": {}
+    "F:\\.Net\\Project\\.Net-Project\\Frontend\\FrontEnd\\FrontEnd.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mike\\Desktop\\.Net-Project\\Frontend\\FrontEnd\\FrontEnd.csproj": {
+    "F:\\.Net\\Project\\.Net-Project\\Frontend\\FrontEnd\\FrontEnd.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mike\\Desktop\\.Net-Project\\Frontend\\FrontEnd\\FrontEnd.csproj",
+        "projectUniqueName": "F:\\.Net\\Project\\.Net-Project\\Frontend\\FrontEnd\\FrontEnd.csproj",
         "projectName": "FrontEnd",
-        "projectPath": "C:\\Users\\mike\\Desktop\\.Net-Project\\Frontend\\FrontEnd\\FrontEnd.csproj",
-        "packagesPath": "C:\\Users\\mike\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mike\\Desktop\\.Net-Project\\Frontend\\FrontEnd\\obj\\",
+        "projectPath": "F:\\.Net\\Project\\.Net-Project\\Frontend\\FrontEnd\\FrontEnd.csproj",
+        "packagesPath": "C:\\Users\\varar\\.nuget\\packages\\",
+        "outputPath": "F:\\.Net\\Project\\.Net-Project\\Frontend\\FrontEnd\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\mike\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\varar\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -44,10 +41,6 @@
             "Blazored.LocalStorage": {
               "target": "Package",
               "version": "[2.1.1, )"
-            },
-            "MediaBrowser.ApiClient": {
-              "target": "Package",
-              "version": "[3.1.0, )"
             },
             "Microsoft.AspNetCore.Blazor": {
               "target": "Package",
