@@ -920,11 +920,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mike\\Desktop\\.Net-Project\\APIGateway\\APIGateway.csproj",
+      "projectUniqueName": "C:\\Users\\mike\\Desktop\\net\\.Net-Project\\APIGateway\\APIGateway.csproj",
       "projectName": "APIGateway",
-      "projectPath": "C:\\Users\\mike\\Desktop\\.Net-Project\\APIGateway\\APIGateway.csproj",
+      "projectPath": "C:\\Users\\mike\\Desktop\\net\\.Net-Project\\APIGateway\\APIGateway.csproj",
       "packagesPath": "C:\\Users\\mike\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mike\\Desktop\\.Net-Project\\APIGateway\\obj\\",
+      "outputPath": "C:\\Users\\mike\\Desktop\\net\\.Net-Project\\APIGateway\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

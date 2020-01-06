@@ -2,6 +2,19 @@
   "version": 3,
   "targets": {
     ".NETStandard,Version=v2.0": {
+      "AspNetMonsters.Blazor.Geolocation/0.5.0-preview1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Components": "3.0.0-rc1.19457.4",
+          "Microsoft.AspNetCore.Components.Web": "3.0.0-rc1.19457.4"
+        },
+        "compile": {
+          "lib/netstandard2.0/AspNetMonsters.Blazor.Geolocation.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AspNetMonsters.Blazor.Geolocation.dll": {}
+        }
+      },
       "Blazored.LocalStorage/2.1.1": {
         "type": "package",
         "dependencies": {
@@ -989,6 +1002,18 @@
     }
   },
   "libraries": {
+    "AspNetMonsters.Blazor.Geolocation/0.5.0-preview1": {
+      "sha512": "Q3gLGSyVKzjwwZ3fso5QBbEOiUDS1pON7zBuYOOevkW5YAadg3mj29gMG3cO1ySu4WyHqH9kH/IlXki+jKwzQg==",
+      "type": "package",
+      "path": "aspnetmonsters.blazor.geolocation/0.5.0-preview1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "aspnetmonsters.blazor.geolocation.0.5.0-preview1.nupkg.sha512",
+        "aspnetmonsters.blazor.geolocation.nuspec",
+        "lib/netstandard2.0/AspNetMonsters.Blazor.Geolocation.dll"
+      ]
+    },
     "Blazored.LocalStorage/2.1.1": {
       "sha512": "C3hls1girWezQy2eVRlngB2gx6CzDn0iWgdgSoa7W6pRf4nK6HOI3MtaWmdNCJQ/bniICIHs+CYvaXqmKx/oLw==",
       "type": "package",
@@ -4443,6 +4468,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
+      "AspNetMonsters.Blazor.Geolocation >= 0.5.0-preview1",
       "Blazored.LocalStorage >= 2.1.1",
       "MediaBrowser.ApiClient >= 3.1.0",
       "Microsoft.AspNetCore.Blazor >= 3.1.0-preview3.19555.2",
@@ -4459,11 +4485,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mike\\Desktop\\.Net-Project\\Frontend\\FrontEnd\\FrontEnd.csproj",
+      "projectUniqueName": "C:\\Users\\mike\\Desktop\\net\\.Net-Project\\Frontend\\FrontEnd\\FrontEnd.csproj",
       "projectName": "FrontEnd",
-      "projectPath": "C:\\Users\\mike\\Desktop\\.Net-Project\\Frontend\\FrontEnd\\FrontEnd.csproj",
+      "projectPath": "C:\\Users\\mike\\Desktop\\net\\.Net-Project\\Frontend\\FrontEnd\\FrontEnd.csproj",
       "packagesPath": "C:\\Users\\mike\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mike\\Desktop\\.Net-Project\\Frontend\\FrontEnd\\obj\\",
+      "outputPath": "C:\\Users\\mike\\Desktop\\net\\.Net-Project\\Frontend\\FrontEnd\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -4493,6 +4519,10 @@
     "frameworks": {
       "netstandard2.0": {
         "dependencies": {
+          "AspNetMonsters.Blazor.Geolocation": {
+            "target": "Package",
+            "version": "[0.5.0-preview1, )"
+          },
           "Blazored.LocalStorage": {
             "target": "Package",
             "version": "[2.1.1, )"

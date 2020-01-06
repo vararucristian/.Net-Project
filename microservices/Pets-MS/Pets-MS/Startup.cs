@@ -50,7 +50,7 @@ namespace Pets_Ms
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseCors();
             app.UseHttpsRedirection();
 
             app.UseRouting();
