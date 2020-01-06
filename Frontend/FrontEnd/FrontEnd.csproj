@@ -6,7 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AspNetMonsters.Blazor.Geolocation" Version="0.5.0-preview1" />
     <PackageReference Include="Blazored.LocalStorage" Version="2.1.1" />
+    <PackageReference Include="MediaBrowser.ApiClient" Version="3.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="3.1.0-preview3.19555.2" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="3.1.0-preview3.19555.2" PrivateAssets="all" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.HttpClient" Version="3.1.0-preview3.19555.2" />

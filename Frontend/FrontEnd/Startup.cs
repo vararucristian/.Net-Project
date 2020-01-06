@@ -1,3 +1,4 @@
+using AspNetMonsters.Blazor.Geolocation;
 using Blazored.LocalStorage;
 using Emby.ApiClient;
 using Emby.ApiClient.Model;
@@ -11,7 +12,7 @@ namespace FrontEnd
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddBlazoredLocalStorage();
-           
+            services.AddSingleton<LocationService>();
         }
 
         public void Configure(IComponentsApplicationBuilder app)

@@ -12,6 +12,6 @@ Welcome to your new app.
     private string apiUrl = "https://localhost:7000/api/users/";
     private async void checkUserStatus()
     {
-        await Http.GetJsonAsync<string>($"{apiUrl}authentificate", "");
+        await Http.GetJsonAsync<string>($"{apiUrl}authentificate");
     }
 }
