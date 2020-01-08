@@ -93,10 +93,10 @@ namespace Pets_MS.Controllers
             }
         }
 
-        [HttpGet("{latitude}/{longitude}")]
-        public async Task<ActionResult<string>> GetPetsByLocationAsync(double latitude, double longitude)
+        [HttpGet("{species}/{latitude}/{longitude}/{distance}")]
+        public async Task<ActionResult<string>> GetPetsByLocationAsync(Animal species, double latitude, double longitude, double distance)
         {
-            var response = await _mediator.Send(new GetPetsByLocationQuery(latitude, longitude));
+            var response = await _mediator.Send(new GetPetsByLocationQuery(species, latitude, longitude, distance));
             var json = JsonSerializer.Serialize(response);
             if (response.Count == 0)
             {
