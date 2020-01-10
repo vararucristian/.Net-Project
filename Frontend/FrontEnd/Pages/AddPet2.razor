@@ -1,4 +1,4 @@
-﻿@page "/add"
+﻿@page "/add2"
 @layout MainLayout
 @inject HttpClient Http
 @inject LocationService  LocationService
@@ -107,15 +107,15 @@
         <button @onclick="CreatePet" class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-lg shadow-lg hover:bg-blue-700 hover:bg-blue hover:text-white border border-blue text-blue" type="button">
             Submit
         </button>
-
-
-
+        
+       
+        
     </div>
     @if (response != null && response.success == false)
     {
         <p>Error while submiting your pet.</p>
     }
-
+    
 </div>
 
 
