@@ -17,7 +17,7 @@ namespace Users_MS.Business.Handlers
     public class CreateUserHandler : IRequestHandler<CreateUser, Dictionary<string, object>>
     {
         private readonly UserContext UserContext;
-        public CreateUserHandler(UserContext userContext, IMediator mediator)
+        public CreateUserHandler(UserContext userContext)
         {
             UserContext = userContext;
 

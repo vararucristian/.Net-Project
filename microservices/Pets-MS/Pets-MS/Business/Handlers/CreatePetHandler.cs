@@ -50,7 +50,7 @@ namespace Users_MS.Business.Handlers
             }
             try
             {
-                var pet = Pet.Create(id, request.Name, request.Species, request.Genre, request.Username, request.Description, request.BirthDate, locationID, imagePath);
+                var pet = Pet.Create(id, request.Name,  request.Species ,  request.Genre, request.Username, request.Description, request.BirthDate, locationID, imagePath);
                 PetContext.Pets.Add(pet);
                 await PetContext.SaveChangesAsync(cancellationToken);
             }

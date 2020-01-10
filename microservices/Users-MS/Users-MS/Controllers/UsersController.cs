@@ -75,14 +75,8 @@ namespace Users_Ms.Controllers
 
             var response = await _mediator.Send(jsonRequest);
             var json = JsonSerializer.Serialize(response);
-            if (response["succes"].Equals(false))
-            {
-                return json;
-            }
-            else
-            {
-                return json;
-            }
+
+            return json;
         }
 
 
