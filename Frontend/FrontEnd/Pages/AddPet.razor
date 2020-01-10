@@ -3,6 +3,8 @@
 @inject HttpClient Http
 @inject LocationService  LocationService
 @inject NavigationManager NavigationManager
+@using System.IO
+
 
 <div class="bg-white shadow-md rounded px-8 pt-8 mt-64 pb-8 mb-4 flex flex-col my-2">
     <div class="-mx-3 md:flex mb-6">
@@ -91,7 +93,12 @@
                     <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
                 </svg>
                 <span class="mt-2 text-base leading-normal">Select a file</span>
-                <input type='file' class="hidden" />
+                <!-- <input type='file' class="hidden" /> -->
+                <InputFile type='file' class="hidden" OnChange="HandleSelection" />
+                @if (string64 != null)
+                {
+                    <img src="data:image/jpg;base64, @string64" />
+                }
             </label>
         </div>
 
@@ -100,6 +107,9 @@
         <button @onclick="CreatePet" class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-lg shadow-lg hover:bg-blue-700 hover:bg-blue hover:text-white border border-blue text-blue" type="button">
             Submit
         </button>
+        
+       
+        
     </div>
     @if (response != null && response.success == false)
     {
@@ -118,6 +128,25 @@
     Animal animal;
     CreatePetInfo petInfo = new CreatePetInfo();
     CreatePetResponse response = null;
+    string status;
+    MemoryStream fileData = null;
+    IFileListEntry file;
+    string string64;
+    async Task HandleSelection(IFileListEntry[] files)
+    {
+        file = files.FirstOrDefault();
+        if (file != null)
+        {
+            // Just load into .NET memory to show it can be done
+            // Alternatively it could be saved to disk, or parsed in memory, or similar
+            fileData = new MemoryStream();
+            await file.Data.CopyToAsync(fileData);
+            string64 = Convert.ToBase64String(fileData.ToArray());
+            status = $"Finished loading {file.Size} bytes from {file.Name}";
+        }
+    }
+
+
     protected override async Task OnInitializedAsync()
     {
         location = await LocationService.GetLocationAsync();
@@ -148,6 +177,7 @@
         public DateTime BirthDate { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+        public string ImageData { get; set; }
 
     }
     private async void CreatePet()
@@ -155,11 +185,13 @@
         petInfo.Longitude = (double)location.Longitude;
         petInfo.Latitude = (double)location.Latitude;
         petInfo.Username = "mike97m";
+
+        petInfo.ImageData = string64;
         response = await Http.PostJsonAsync<CreatePetResponse>(apiUrl, petInfo);
         if (response.success)
             NavigationManager.NavigateTo("/");
 
-}
+    }
 
     public class CreatePetResponse
     {

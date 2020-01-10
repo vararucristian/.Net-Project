@@ -2,6 +2,7 @@
 @layout BasicLayout
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
+
 <!-- Container -->
 <div class="container mx-auto">
     <div class="flex justify-center px-6 my-12">
@@ -52,7 +53,8 @@
                     </div>
                     <div class="mb-4 md:flex md:justify-between">
                         <div class="mb-4 md:mr-2 md:mb-0">
-                            <label class="block mb-2 text-sm font-bold text-gray-700" for="password"><br />
+                            <label class="block mb-2 text-sm font-bold text-gray-700" for="password">
+                                <br />
                                 Password
                             </label>
                             <input @bind="password" class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border border-red-500 rounded shadow appearance-none focus:outline-none focus:shadow-outline"
@@ -76,7 +78,28 @@
                                 <span class="small form-text text-danger">Passwords didn't match</span>
                             }
                         </div>
-                       
+
+                    </div>
+                    <div class="-mx-3 md:flex mb-6">
+
+                        <div class="md:w-full px-3">
+                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-last-name">
+                                Add Photos
+                            </label>
+                            <label class="w-full w-64 flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-white">
+                                <svg class="w-8 h-8 items-center" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+                                </svg>
+                                <span class="mt-2 text-base leading-normal">Select a file</span>
+                                <!-- <input type='file' class="hidden" /> -->
+                                <InputFile type='file' class="hidden" OnChange="HandleSelection" />
+                                @if (string64 != null)
+                                {
+                                    <img src="data:image/jpg;base64, @string64" />
+                                }
+                            </label>
+                        </div>
+
                     </div>
                     <div class="mb-6 text-center">
                         <button @onclick="@AddAccount" class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
@@ -86,7 +109,7 @@
                     </div>
                     <hr class="mb-6 border-t" />
                     <div class="text-center">
-                        @if(response != null && response.succes == false)
+                        @if (response != null && response.succes == false)
                         {
                             <span class="small form-text text-danger">@response.error_message</span>
                         }
@@ -121,6 +144,20 @@
     string password;
     string password2;
     CreateAccountResponse response = null;
+    MemoryStream fileData = null;
+    IFileListEntry file;
+    string string64;
+
+    async Task HandleSelection(IFileListEntry[] files)
+    {
+        file = files.FirstOrDefault();
+        if (file != null)
+        {
+            fileData = new MemoryStream();
+            await file.Data.CopyToAsync(fileData);
+            string64 = Convert.ToBase64String(fileData.ToArray());
+        }
+    }
     private async void AddAccount()
     {
         if (password != password2)
@@ -132,6 +169,7 @@
             Email = email,
             Password = password,
             ConfirmPassword = password2,
+            ImageData = string64
 
         };
 
@@ -145,15 +183,12 @@
     public class CreateAccount
     {
         public string FirstName { get;  set; }
-
         public string LastName { get;  set; }
-
         public string UserName { get;  set; }
-
         public string Email { get;  set; }
-
         public string Password { get;  set; }
-         public string ConfirmPassword { get; set; }
+        public string ConfirmPassword { get; set; }
+        public string ImageData { get; set; }
     }
 
     public class User
