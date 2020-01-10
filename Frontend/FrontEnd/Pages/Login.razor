@@ -83,6 +83,7 @@
             if (!Http.DefaultRequestHeaders.Contains("Authorization"))
             {
                 var token = await LocalStorage.GetItemAsync<string>("token");
+                
                 Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             }
             await Http.GetAsync($"{apiUrl}authentificate");

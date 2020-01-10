@@ -351,3 +351,8 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+Frontend/.vs/FrontEnd/DesignTimeBuild/.dtbcache
+Frontend/.vs/FrontEnd/v16/.suo
+Frontend/.vs/FrontEnd/v16/Server/sqlite3/storage.ide
+Frontend/.vs/FrontEnd/v16/Server/sqlite3/storage.ide-shm
+Frontend/.vs/FrontEnd/v16/Server/sqlite3/storage.ide-wal

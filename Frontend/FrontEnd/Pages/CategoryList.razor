@@ -1,0 +1,241 @@
+﻿@page "/categories"
+@layout MainLayout
+@inject HttpClient Http
+@inject LocationService  LocationService
+@inject NavigationManager NavigationManager
+@using System.IO
+
+@if (location == null)
+{
+    <p>Loading</p>
+}
+else
+{
+<div class="flex flex-wrap items-top .my-0 pt-20">
+
+
+    <div class="md:w-1/2 lg:w-1/3 py-4 px-4 ">
+        <div class=" ">
+            <a href="/view/@Animal.Cat/">
+                <div class="bg-white relative shadow p-2 rounded-lg text-gray-800 hover:shadow-lg">
+                    <img src="http://alpha.backer.id/assets/images/bg/kucingmalas.jpeg" class="h-32 rounded-lg w-full object-cover">
+                    <div class="flex justify-center">
+                        <img src="https://cdn3.iconfinder.com/data/icons/avatars-9/145/Avatar_Cat-512.png" class="rounded-full -mt-6 border-4 object-center object-cover border-white mr-2 h-16 w-16">
+                    </div>
+                    <div class="py-2 px-2">
+                        <div class=" font-bold font-title text-center">Cats</div>
+
+                        <div class="text-sm font-light text-center my-2">
+                            “What greater gift than the love of a cat.”
+                            ― Charles Dickens
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+
+    <div class="md:w-1/2 lg:w-1/3 py-4 px-4">
+        <div class=" ">
+            <a href="/view/@Animal.Dog/">
+                <div class="bg-white relative shadow p-2 rounded-lg text-gray-800 hover:shadow-lg">
+                    <img src="https://s.abcnews.com/images/US/160825_vod_orig_historyofdogs_16x9_992.jpg" class="h-32 rounded-lg w-full object-cover">
+                    <div class="flex justify-center">
+                        <img src="https://www.smalldogcreative.com/wp-content/uploads/2019/02/Gilian-Avatar-Circle.png" class="rounded-full -mt-6 border-4 object-center object-cover border-white mr-2 h-16 w-16">
+                    </div>
+                    <div class="py-2 px-2">
+                        <div class=" font-bold font-title text-center">Dogs</div>
+
+                        <div class="text-sm font-light text-center my-2">“Dogs are my favorite people”  – Richard Dean Anderson</div>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+
+    <div class="md:w-1/2 lg:w-1/3 py-4 px-4">
+        <div class=" ">
+            <a href="/view/@Animal.Fish/">
+                <div class="bg-white relative shadow p-2 rounded-lg text-gray-800 hover:shadow-lg">
+                    <img src="https://www.mcgill.ca/oss/files/oss/styles/hd/public/fish.png?itok=Ty_baHwK&timestamp=1538677144" class="h-32 rounded-lg w-full object-cover">
+                    <div class="flex justify-center">
+                        <img src="https://lh3.googleusercontent.com/2L-amEVRCk5-sQJiOzUFD_07geRE_R-NKhz5hbmRTgqEe3H5znt4YTIQb618pmtxZ8xs" class="rounded-full -mt-6 border-4 object-center object-cover border-white mr-2 h-16 w-16">
+                    </div>
+                    <div class="py-2 px-2">
+                        <div class=" font-bold font-title text-center">Fish</div>
+
+                        <div class="text-sm font-light text-center my-2">"Happiness is having a pet fish"</div>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+
+    <div class="md:w-1/2 lg:w-1/3 py-4 px-4">
+        <div class=" ">
+            <a href="/view/@Animal.Turtle/">
+                <div class="bg-white relative shadow p-2 rounded-lg text-gray-800 hover:shadow-lg">
+
+                    <img src="https://s2.best-wallpaper.net/wallpaper/1920x1080/1309/Two-Green-Sea-Turtles-underwater-coral-reef-Maui_1920x1080.jpg" class="h-32 rounded-lg w-full object-cover">
+                    <div class="flex justify-center">
+                        <img src="https://png.pngtree.com/png-vector/20191027/ourlarge/pngtree-cute-turtle-avatar-with-a-yellow-background-png-image_1873481.jpg" class="rounded-full -mt-6 border-4 object-center object-cover border-white mr-2 h-16 w-16">
+                    </div>
+                    <div class="py-2 px-2">
+                        <div class=" font-bold font-title text-center">Turtles</div>
+
+                        <div class="text-sm font-light text-center my-2">"Your speed doesn't matter, forward is forward"</div>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+
+    <div class="md:w-1/2 lg:w-1/3 py-4 px-4">
+        <div class=" ">
+            <a href="/view/@Animal.Rabbit/">
+                <div class="bg-white relative shadow p-2 rounded-lg text-gray-800 hover:shadow-lg">
+
+                    <img src="https://a57.foxnews.com/static.foxnews.com/foxnews.com/content/uploads/2019/09/931/524/Rabbits_iStock.jpg?ve=1&tl=1" class="h-32 rounded-lg w-full object-cover">
+                    <div class="flex justify-center">
+                        <img src="https://avatarfiles.alphacoders.com/933/93312.jpg" class="rounded-full -mt-6 border-4 object-center object-cover border-white mr-2 h-16 w-16">
+                    </div>
+                    <div class="py-2 px-2">
+                        <div class=" font-bold font-title text-center">Rabbits</div>
+
+                        <div class="text-sm font-light text-center my-2">"The man who chases two rabbits, catches neither." - Confucius</div>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+
+    <div class="md:w-1/2 lg:w-1/3 py-4 px-4">
+        <div class=" ">
+            <a href="/view/@Animal.Parrot/">
+                <div class="bg-white relative shadow p-2 rounded-lg text-gray-800 hover:shadow-lg">
+
+                    <img src="https://images.ctfassets.net/cnu0m8re1exe/8PR0e7TzIzkUbL96RUH7O/a0d36d4e5c5aede122bb0658fbd74cb0/shutterstock_631165448.jpg?w=650&h=433&fit=fill" class="h-32 rounded-lg w-full object-cover">
+                    <div class="flex justify-center">
+                        <img src="https://www.stickers-muraux.fr/ar-stickers-perroquet-24556.jpg" class="rounded-full -mt-6 border-4 object-center object-cover border-white mr-2 h-16 w-16">
+                    </div>
+                    <div class="py-2 px-2">
+                        <div class=" font-bold font-title text-center">Parrots</div>
+
+                        <div class="text-sm font-light text-center my-2">"Parrots are the opium of the people" - Karl Marx</div>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+
+    <div class="md:w-1/2 lg:w-1/3 py-4 px-4">
+        <div class=" ">
+            <a href="/view/@Animal.Hamster/">
+                <div class="bg-white relative shadow p-2 rounded-lg text-gray-800 hover:shadow-lg">
+
+                    <img src="http://images6.fanpop.com/image/photos/40400000/Hamsters-hamsters-40449064-1024-768.jpg" class="h-32 rounded-lg w-full object-cover">
+                    <div class="flex justify-center">
+                        <img src="https://hamsters101.com/wp-content/uploads/2018/11/FEATURED-Pregnancy-and-Birth-in-Syrian-Hamsters-1.jpg" class="rounded-full -mt-6 border-4 object-center object-cover border-white mr-2 h-16 w-16">
+                    </div>
+                    <div class="py-2 px-2">
+                        <div class=" font-bold font-title text-center">Hamsters</div>
+
+                        <div class="text-sm font-light text-center my-2">"I'm done with men. I have a hamster. That's all I need." - Janet Evanovich</div>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </div>
+</div>
+}
+
+@code
+{
+    private string apiUrl = "https://localhost:7000/api/pets/";
+    Location location;
+    Animal animal;
+    CreatePetInfo petInfo = new CreatePetInfo();
+    CreatePetResponse response = null;
+    string status;
+    MemoryStream fileData = null;
+    IFileListEntry file;
+    string string64;
+    async Task HandleSelection(IFileListEntry[] files)
+    {
+        file = files.FirstOrDefault();
+        if (file != null)
+        {
+            // Just load into .NET memory to show it can be done
+            // Alternatively it could be saved to disk, or parsed in memory, or similar
+            fileData = new MemoryStream();
+            await file.Data.CopyToAsync(fileData);
+            string64 = Convert.ToBase64String(fileData.ToArray());
+            status = $"Finished loading {file.Size} bytes from {file.Name}";
+        }
+    }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        location = await LocationService.GetLocationAsync();
+    }
+    public enum Animal
+    {
+        Dog,
+        Cat,
+        Fish,
+        Turtle,
+        Rabbit,
+        Parrot,
+        Hamster
+    }
+    public enum Gen
+    {
+        Male,
+        Female
+    }
+    public class CreatePetInfo
+    {
+
+        public string Name { get; set; }
+        public Animal Species { get; set; }
+        public Gen Genre { get; set; }
+        public string Username { get; set; }
+        public string Description { get; set; }
+        public DateTime BirthDate { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+        public string ImageData { get; set; }
+
+    }
+    private async void CreatePet()
+    {
+        petInfo.Longitude = (double)location.Longitude;
+        petInfo.Latitude = (double)location.Latitude;
+        petInfo.Username = "mike97m";
+
+        petInfo.ImageData = string64;
+        response = await Http.PostJsonAsync<CreatePetResponse>(apiUrl, petInfo);
+        if (response.success)
+            NavigationManager.NavigateTo("/");
+
+    }
+
+    public class CreatePetResponse
+    {
+        public bool success { get; set; }
+    }
+}
