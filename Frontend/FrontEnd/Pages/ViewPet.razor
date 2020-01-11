@@ -5,7 +5,7 @@
 @inject NavigationManager NavigationManager
 
 
-@if (location == null)
+@if (location == null || pets.Count == 0)
 {
     <p>Loading</p>
 }
@@ -19,7 +19,7 @@ else
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
         </p><br>
         <p>Birthday 14/12/2018</p>
- 
+ @animal
  @location.Latitude
         @location.Longitude
     </div>
@@ -43,18 +43,19 @@ else
     private string apiUrl = "https://localhost:7000/api/pets/";
     Location location;
     Animal animal;
-    CreatePetInfo petInfo = new CreatePetInfo();
-    CreatePetResponse response = null;
     string status;
     MemoryStream fileData = null;
     IFileListEntry file;
     string string64;
-
+    List<GetPetResponse> pets = new List<GetPetResponse>();
 
 
     protected override async Task OnInitializedAsync()
     {
         location = await LocationService.GetLocationAsync();
+
+        Animal.TryParse<Animal>(Category, out animal);
+        await Http.GetJsonAsync<string>($"{apiUrl}{animal}/{location.Latitude}/{location.Longitude}/100");
     }
     public enum Animal
     {
@@ -71,35 +72,32 @@ else
         Male,
         Female
     }
-    public class CreatePetInfo
+    public class Pet
     {
-
+        public string Id { get; set; }
         public string Name { get; set; }
-        public Animal Species { get; set; }
-        public Gen Genre { get; set; }
+      //  public int Species { get; set; }
+     //   public int Genre { get; set; }
         public string Username { get; set; }
         public string Description { get; set; }
+       // public object Location { get; set; }
         public DateTime BirthDate { get; set; }
+       // public string LocationId { get; set; }
+        public string ImagePath { get; set; }
+    }
+
+    public class LocationResponse
+    {
         public double Latitude { get; set; }
         public double Longitude { get; set; }
-        public string ImageData { get; set; }
-
     }
-    private async void CreatePet()
+    public class MainResponse
     {
-        petInfo.Longitude = (double)location.Longitude;
-        petInfo.Latitude = (double)location.Latitude;
-        petInfo.Username = "mike97m";
-
-        petInfo.ImageData = string64;
-        response = await Http.PostJsonAsync<CreatePetResponse>(apiUrl, petInfo);
-        if (response.success)
-            NavigationManager.NavigateTo("/");
-
+        public List<GetPetResponse> pets { get; set; }
     }
-
-    public class CreatePetResponse
+    public class GetPetResponse
     {
-        public bool success { get; set; }
+        public Pet pet { get; set; }
+        public LocationResponse location { get; set; }
     }
 }
