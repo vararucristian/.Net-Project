@@ -18,8 +18,7 @@ else if (petIndex == -1)
 else
 {
     <div class="max-w-md mx-auto rounded overflow-hidden shadow-lg my-4 margin-4 ">
-        <img src="file:///C:/Users/mike/Desktop/net/.Net-Project/microservices/Pets-MS/Pets-MS/PetsImages/0c29e74a-7c4d-4735-88ae-cd3604b61529.jpg" />
-        <img class="w-full" src="@pets[petIndex].pet.ImagePath" alt="Sunset in the mountains">
+        <img class="w-full"src="data:image/jpg;base64, @pets[petIndex].image" alt="pet">
         <div class="px-4 py-3">
             <div class="font-bold text-xl mb-2">@pets[petIndex].pet.Name</div>
             <p class="text-grey-darker text-base">
@@ -209,5 +208,6 @@ else
     {
         public Pet pet { get; set; }
         public LocationResponse location { get; set; }
+        public string image { get; set; }
     }
 }
