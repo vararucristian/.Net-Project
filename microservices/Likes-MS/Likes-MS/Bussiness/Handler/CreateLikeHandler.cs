@@ -64,7 +64,9 @@ namespace Likes_MS.Bussiness.Handler
         {
             var response = new Dictionary<string, object>();
             var succes = true;
-            var emailSent = SendEmail("vararucristian@yahoo.com", request.Username);
+            var emailSent = false;
+            if(request.PersonLike==1)
+                SendEmail("vararucristian@yahoo.com", request.Username);
             var like = Like.Create(request.PersonId, request.PetId,request.PersonLike,request.PetLike);
             try
             {

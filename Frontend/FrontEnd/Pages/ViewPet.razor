@@ -32,7 +32,7 @@ else
         </div>
         @if(likeResponse!= null && !likeResponse.succes)
         {
-            <p>Error while sending your like, please try again.</p>
+            <p>Error while sending your request, please try again.</p>
         }
         <div class="px-6 py-4">
             <div class="mb-6 text-center">
@@ -64,15 +64,22 @@ else
     double distance = 0;
     CreateLikeResponse likeResponse;
     String personId;
-    private async void LikePet()
+    private CreateLike createLikeRequestBody(int like_type)
     {
         CreateLike like = new CreateLike()
         {
             PetId = pets[petIndex].pet.Id,
-            PersonId = personId
+            PersonId = personId,
+            PersonLike = like_type,
+            PetLike = 0,
+            Username = pets[petIndex].pet.Username
         };
+        return like;
+    }
+    private async void LikePet()
+    {
 
-        likeResponse = await Http.PostJsonAsync<CreateLikeResponse>($"{apiUrlLikes}", like);
+        likeResponse = await Http.PostJsonAsync<CreateLikeResponse>($"{apiUrlLikes}", createLikeRequestBody(1));
         if (petIndex < pets.Length - 1 && likeResponse.succes)
         {
             petIndex++;
@@ -96,8 +103,11 @@ else
     }
     private async void IgnorePet()
     {
-        if (petIndex < pets.Length - 1)
+       
+        likeResponse = await Http.PostJsonAsync<CreateLikeResponse>($"{apiUrlLikes}", createLikeRequestBody(-1));
+        if (petIndex < pets.Length - 1 && likeResponse.succes)
         {
+
             petIndex++;
             await SkipAlreadyLiked();
         }
@@ -156,6 +166,9 @@ else
     {
         public string PersonId { get; set; }
         public string PetId { get; set; }
+        public int PersonLike { get; set; }
+        public int PetLike { get; set; }
+        public string Username { get; set; }
 
     }
     public enum Animal
