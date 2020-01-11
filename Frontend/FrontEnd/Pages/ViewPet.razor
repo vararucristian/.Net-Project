@@ -51,19 +51,22 @@ else
 @code
 {
     [Parameter] public string Category { get; set; }
+
     private string apiUrlPets = "https://localhost:7000/api/pets/";
     private string apiUrlLikes = "https://localhost:7000/api/likes/";
+
     Location location;
     Animal animal;
-    string status;
     MemoryStream fileData = null;
     IFileListEntry file;
-    string string64;
+    string string64, status;
     GetPetResponse[] pets = null;
     int petIndex = 0;
     double distance = 0;
     CreateLikeResponse likeResponse;
     String personId;
+
+
     private CreateLike createLikeRequestBody(int like_type)
     {
         CreateLike like = new CreateLike()

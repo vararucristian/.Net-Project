@@ -4,16 +4,8 @@
 @inject ILocalStorageService LocalStorage
 @inject NavigationManager NavigationManager
 
-<h1>Hello, world!</h1>
-
-Welcome to your new app.
-@token
-<br />
-<button @onclick="checkUserStatus">yeee</button>
-
 
 @code{
-    private string apiUrl = "https://localhost:7000/api/users/";
     public bool loggedIn;
     public string token;
     protected override async Task OnInitializedAsync()
@@ -21,12 +13,9 @@ Welcome to your new app.
         loggedIn = await LocalStorage.ContainKeyAsync("token");
         if (!loggedIn)
             NavigationManager.NavigateTo("/login");
+        else
+            NavigationManager.NavigateTo("/add");
 
-}
-    private async void checkUserStatus()
-    {
-        //await Http.GetJsonAsync<string>($"{apiUrl}authentificate");
-        loggedIn = await LocalStorage.ContainKeyAsync("token");
-        token = await LocalStorage.GetItemAsync<string>("token");
     }
+   
 }
