@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Net.Http;
 
 namespace Likes_MS.Bussiness.Handler
 {
@@ -15,13 +16,18 @@ namespace Likes_MS.Bussiness.Handler
     public class CreateLikeHandler : IRequestHandler<CreateLike, Dictionary<string, object>>
     {
         private readonly LikeContext LikeContext;
-
+        private static readonly HttpClient client = new HttpClient();
         public CreateLikeHandler(LikeContext likeContext)
         {
             LikeContext = likeContext;
         }
 
+       /* private string GetEmailAddress(string username)
+        {
+            string response = await client.GetStringAsync()
 
+            return ""
+        }*/
 
         private bool SendEmail(string eMail, string username)
         {
@@ -58,8 +64,8 @@ namespace Likes_MS.Bussiness.Handler
         {
             var response = new Dictionary<string, object>();
             var succes = true;
-            var emailSent = SendEmail(request.PersonEMail, request.Username);
-            var like = Like.Create(request.PersonId, request.PetId);
+            var emailSent = SendEmail("vararucristian@yahoo.com", request.Username);
+            var like = Like.Create(request.PersonId, request.PetId,request.PersonLike,request.PetLike);
             try
             {
 

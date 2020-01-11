@@ -18,15 +18,15 @@ namespace Likes_MS.Data
 
         private Like(){}
 
-        public static Like Create(Guid personId , Guid petId )
+        public static Like Create(Guid personId , Guid petId , int personLike , int petlike)
         {
             return new Like()
             {
                 Id = Guid.NewGuid(),
                 PersonId = personId,
                 PetId = petId,
-                PersonLike = 1,
-                PetLike = 0
+                PersonLike = personLike,
+                PetLike = petlike
             };
         }
     }
