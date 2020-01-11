@@ -30,8 +30,11 @@ namespace Pets_MS.Business.Handlers
 
                 var entity = new Dictionary<string, object>();
                 var location = PetContext.Locations.Where(l => l.Id == pet.LocationId).Select(l => Coordinate.Create(l.Latitude, l.Longitude)).FirstOrDefault();
-                var image = Convert.ToBase64String(File.ReadAllBytes(pet.ImagePath));
-
+                var image = "";
+                try { 
+                    image = Convert.ToBase64String(File.ReadAllBytes(pet.ImagePath));
+                }catch (Exception) { }
+               
                 entity.Add("pet", pet);
                 entity.Add("location", location);
                 entity.Add("image", image);
