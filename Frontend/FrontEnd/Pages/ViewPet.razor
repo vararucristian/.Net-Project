@@ -3,59 +3,160 @@
 @inject HttpClient Http
 @inject LocationService  LocationService
 @inject NavigationManager NavigationManager
+@inject ILocalStorageService LocalStorage
 
+@using GeoCoordinatePortable
 
-@if (location == null || pets.Count == 0)
+@if (location == null || pets == null)
 {
     <p>Loading</p>
 }
+else if (petIndex == -1)
+{
+    <p>There are no more pets in your area.</p>
+}
 else
 {
-<div class="max-w-md mx-auto rounded overflow-hidden shadow-lg my-4 margin-4 ">
-    <img class="w-full" src="https://s.marketwatch.com/public/resources/images/MW-HS874_DogHea_ZH_20191008121436.jpg" alt="Sunset in the mountains">
-    <div class="px-4 py-3">
-        <div class="font-bold text-xl mb-2">Name here</div>
-        <p class="text-grey-darker text-base">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
-        </p><br>
-        <p>Birthday 14/12/2018</p>
- @animal
- @location.Latitude
-        @location.Longitude
-    </div>
-    <div class="px-6 py-4">
-        <div class="mb-6 text-center">
-            <button class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-lg shadow-lg hover:bg-blue-700 hover:bg-blue hover:text-white border border-blue text-blue" type="button">
-                Like
-            </button>
-            <br><br>
-            <button class="w-full px-4 py-2 font-bold text-red bg-blue-500 rounded-lg shadow-lg hover:bg-red-700 hover:bg-red hover:text-white border border-red text-red" type="button">
-                Ignore
-            </button>
+    <div class="max-w-md mx-auto rounded overflow-hidden shadow-lg my-4 margin-4 ">
+        <img class="w-full"src="data:image/jpg;base64, @pets[petIndex].image" alt="pet">
+        <div class="px-4 py-3">
+            <div class="font-bold text-xl mb-2">@pets[petIndex].pet.Name</div>
+            <p class="text-grey-darker text-base">
+                @pets[petIndex].pet.Description
+            </p><br>
+            <p>Birthday @pets[petIndex].pet.BirthDate</p>
+            @animal
+
+            @location.Latitude
+            @location.Longitude
+        </div>
+        @if(likeResponse!= null && !likeResponse.succes)
+        {
+            <p>Error while sending your like, please try again.</p>
+        }
+        <div class="px-6 py-4">
+            <div class="mb-6 text-center">
+                <button @onclick="LikePet" class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-lg shadow-lg hover:bg-blue-700 hover:bg-blue hover:text-white border border-blue text-blue" type="button">
+                    Like
+                </button>
+                <br><br>
+                <button @onclick="IgnorePet" class="w-full px-4 py-2 font-bold text-red bg-blue-500 rounded-lg shadow-lg hover:bg-red-700 hover:bg-red hover:text-white border border-red text-red" type="button">
+                    Skip
+                </button>
+            </div>
         </div>
     </div>
-</div>
 }
 
 @code
 {
-    [Parameter] public string Category{get;set;}
-    private string apiUrl = "https://localhost:7000/api/pets/";
+    [Parameter] public string Category { get; set; }
+    private string apiUrlPets = "https://localhost:7000/api/pets/";
+    private string apiUrlLikes = "https://localhost:7000/api/likes/";
     Location location;
     Animal animal;
     string status;
     MemoryStream fileData = null;
     IFileListEntry file;
     string string64;
-    List<GetPetResponse> pets = new List<GetPetResponse>();
+    GetPetResponse[] pets = null;
+    int petIndex = 0;
+    double distance = 0;
+    CreateLikeResponse likeResponse;
+    String personId;
+    private async void LikePet()
+    {
+        CreateLike like = new CreateLike()
+        {
+            PetId = pets[petIndex].pet.Id,
+            PersonId = personId
+        };
 
+        likeResponse = await Http.PostJsonAsync<CreateLikeResponse>($"{apiUrlLikes}", like);
+        if (petIndex < pets.Length - 1 && likeResponse.succes)
+        {
+            petIndex++;
+            await SkipAlreadyLiked();
+        }
+        else
+            petIndex = -1;
+    }
+    private async Task SkipAlreadyLiked()
+    {
+        string petId = pets[petIndex].pet.Id;
+        var response = await Http.GetJsonAsync<CheckLikeResponse>($"{apiUrlLikes}{personId}/{petId}");
+        while(response.Result.succes)
+        {
+            if (petIndex > pets.Length - 1)
+                break;
+            petIndex++;
+            petId = pets[petIndex].pet.Id;
+            response = await Http.GetJsonAsync<CheckLikeResponse>($"{apiUrlLikes}{personId}/{petId}");
+        }
+    }
+    private async void IgnorePet()
+    {
+        if (petIndex < pets.Length - 1)
+        {
+            petIndex++;
+            await SkipAlreadyLiked();
+        }
+        else
+            petIndex = -1;
 
+    }
     protected override async Task OnInitializedAsync()
     {
         location = await LocationService.GetLocationAsync();
-
+        personId = await LocalStorage.GetItemAsync<string>("id");
         Animal.TryParse<Animal>(Category, out animal);
-        await Http.GetJsonAsync<string>($"{apiUrl}{animal}/{location.Latitude}/{location.Longitude}/100");
+        pets = await Http.GetJsonAsync<GetPetResponse[]>($"{apiUrlPets}{animal}/{location.Latitude}/{location.Longitude}/100/");
+        await SkipAlreadyLiked();
+    }
+
+
+
+
+    public class Result
+    {
+        public bool succes { get; set; }
+        public Like like { get; set; }
+    }
+
+    public class CheckLikeResponse
+    {
+        public Result Result { get; set; }
+        public int Id { get; set; }
+        public object Exception { get; set; }
+        public int Status { get; set; }
+        public bool IsCanceled { get; set; }
+        public bool IsCompleted { get; set; }
+        public bool IsCompletedSuccessfully { get; set; }
+        public int CreationOptions { get; set; }
+        public object AsyncState { get; set; }
+        public bool IsFaulted { get; set; }
+    }
+
+
+    public class Like
+    {
+        public string Id { get; set; }
+        public string PersonId { get; set; }
+        public string PetId { get; set; }
+        public int PersonLike { get; set; }
+        public int PetLike { get; set; }
+    }
+
+    public class CreateLikeResponse
+    {
+        public bool succes { get; set; }
+        public Like like { get; set; }
+    }
+    public class CreateLike
+    {
+        public string PersonId { get; set; }
+        public string PetId { get; set; }
+
     }
     public enum Animal
     {
@@ -76,14 +177,22 @@ else
     {
         public string Id { get; set; }
         public string Name { get; set; }
-      //  public int Species { get; set; }
-     //   public int Genre { get; set; }
+        //  public int Species { get; set; }
+        //   public int Genre { get; set; }
         public string Username { get; set; }
         public string Description { get; set; }
-       // public object Location { get; set; }
+        public LocationResponse Location { get; set; }
         public DateTime BirthDate { get; set; }
-       // public string LocationId { get; set; }
+        // public string LocationId { get; set; }
         public string ImagePath { get; set; }
+
+        public double GetDistance(Location location)
+        {
+            var sCoord = new GeoCoordinate((double)location.Latitude, (double)location.Longitude);
+            var eCoord = new GeoCoordinate(this.Location.Latitude, this.Location.Longitude);
+
+            return sCoord.GetDistanceTo(eCoord);
+        }
     }
 
     public class LocationResponse
@@ -99,5 +208,6 @@ else
     {
         public Pet pet { get; set; }
         public LocationResponse location { get; set; }
+        public string image { get; set; }
     }
 }
