@@ -48,7 +48,14 @@ namespace Messages_MS.Controllers
             return json;
         }
 
+        [HttpGet("{receiverId}/{senderId}")]
+        public async Task<ActionResult<string>> GetMessagesBySenderandReceiverIdAsync(Guid receiverId,Guid senderId)
+        {
+            var messages = await _mediator.Send(new GetMessagesBySenderandReceiverIdQuery(receiverId,senderId));
+            var json = JsonSerializer.Serialize(messages);
 
+            return json;
+        }
         // GET: api/Messages/5
         //[HttpGet("{id}", Name = "Get")]
         //public string Get(int id)

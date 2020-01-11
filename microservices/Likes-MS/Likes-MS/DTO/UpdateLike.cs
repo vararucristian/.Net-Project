@@ -10,6 +10,8 @@ namespace Likes_MS.DTO
     {
         public Guid PersonId { get; set; }
         public Guid PetId { get; set; }
+
+        
         public int PetLike { get; set; }
     }
 }

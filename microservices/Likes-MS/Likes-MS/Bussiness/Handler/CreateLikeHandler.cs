@@ -8,6 +8,7 @@ using System.Net.Mail;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace Likes_MS.Bussiness.Handler
 {
@@ -22,12 +23,13 @@ namespace Likes_MS.Bussiness.Handler
             LikeContext = likeContext;
         }
 
-       /* private string GetEmailAddress(string username)
+        private async Task<string> GetEmailAddressAsync(string username)
         {
-            string response = await client.GetStringAsync()
+            string response = await client.GetStringAsync("https://localhost:5001/api/users/username");
+            UserResponse userResponse = JsonConvert.DeserializeObject<UserResponse>(response);
 
-            return ""
-        }*/
+            return userResponse.user.Email;
+        }
 
         private bool SendEmail(string eMail, string username)
         {
@@ -53,7 +55,8 @@ namespace Likes_MS.Bussiness.Handler
                 smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
                 smtp.Send(message);
             }
-            catch (Exception) {
+            catch (Exception)
+            {
                 emailSent = false;
             }
 
@@ -62,10 +65,13 @@ namespace Likes_MS.Bussiness.Handler
 
         public async Task<Dictionary<string, object>> Handle(CreateLike request, CancellationToken cancellationToken)
         {
+            string requestAddress= "https://localhost:5001/api/users/username/"+request.Username;
+            string userResponseString = await client.GetStringAsync(requestAddress);
+            UserResponse userResponse = JsonConvert.DeserializeObject<UserResponse>(userResponseString);
             var response = new Dictionary<string, object>();
             var succes = true;
-            var emailSent = SendEmail("vararucristian@yahoo.com", request.Username);
-            var like = Like.Create(request.PersonId, request.PetId,request.PersonLike,request.PetLike);
+            var emailSent = SendEmail(userResponse.user.Email, request.Username);
+            var like = Like.Create(request.PersonId, request.PetId, request.PersonLike, request.PetLike);
             try
             {
 

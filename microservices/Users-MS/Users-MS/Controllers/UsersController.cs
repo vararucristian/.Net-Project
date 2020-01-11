@@ -43,14 +43,10 @@ namespace Users_Ms.Controllers
         }
 
         [HttpGet("username/{userName}")]
-        public async Task<ActionResult<string>> GetUsersByUserNameAndPassword(string userName)
+        public async Task<ActionResult<string>> GetUsersByUserName(string userName)
         {
             var response = await _mediator.Send(new GetUserByUsernameQuery(userName));
             var json = JsonSerializer.Serialize(response);
-            if (response["succes"].Equals(false))
-            {
-                return BadRequest(json);
-            }
             return json;
         }
 
