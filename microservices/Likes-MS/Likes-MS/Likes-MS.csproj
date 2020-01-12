@@ -10,6 +10,10 @@
     <Compile Remove="Migrations\20200108165453_Initial-Migration.Designer.cs" />
     <Compile Remove="Migrations\20200108173057_Second-Migration.cs" />
     <Compile Remove="Migrations\20200108173057_Second-Migration.Designer.cs" />
+    <Compile Remove="Migrations\20200108173210_Initial-Migration.cs" />
+    <Compile Remove="Migrations\20200108173210_Initial-Migration.Designer.cs" />
+    <Compile Remove="Migrations\20200111160627_ownerID.cs" />
+    <Compile Remove="Migrations\20200111160627_ownerID.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Likes_MS.Migrations
 {
     [DbContext(typeof(LikeContext))]
-    partial class LikesContextModelSnapshot : ModelSnapshot
+    partial class LikeContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -41,6 +41,10 @@ namespace Likes_MS.Migrations
                     b.Property<int>("PetLike")
                         .HasColumnType("int")
                         .HasMaxLength(2);
+
+                    b.Property<Guid>("PetOwnerId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasMaxLength(36);
 
                     b.HasKey("Id");
 

@@ -12,19 +12,23 @@ namespace Likes_MS.Data
 
         public Guid PetId { get; private set; }
 
+        public Guid PetOwnerId { get; set; }
         public int PersonLike { get; set; }
 
         public int PetLike { get; set; }
 
+        
+
         private Like(){}
 
-        public static Like Create(Guid personId , Guid petId , int personLike , int petlike)
+        public static Like Create(Guid personId , Guid petId,Guid petOwnerId , int personLike , int petlike)
         {
             return new Like()
             {
                 Id = Guid.NewGuid(),
                 PersonId = personId,
                 PetId = petId,
+                PetOwnerId = petOwnerId,
                 PersonLike = personLike,
                 PetLike = petlike
             };

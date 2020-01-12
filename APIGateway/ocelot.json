@@ -19,6 +19,7 @@
         "AllowedScopes": []
       }
     },
+
     {
       "UpstreamPathTemplate": "/api/users{path}",
       "UpstreamHttpMethod": [

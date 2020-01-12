@@ -23,11 +23,21 @@ namespace Likes_MS.Controllers
         }
         
         // GET: api/Likes/5
-        [HttpGet("{PersonId}/{PetId}")]
-        public string GetByIds(Guid PersonId , Guid PetId)
+        [HttpGet("{PersonId}/{petOwnerId}")]
+        public string GetByIds(Guid PersonId , Guid petOwnerId)
         {
-            var response = _mediator.Send(new GetLikeByIdsQuery(PersonId, PetId));
+            var response = _mediator.Send(new GetLikeByIdsQuery(PersonId, petOwnerId));
             var json = JsonSerializer.Serialize(response);
+            return json;
+        }
+
+
+        // GET: api/Likes/5
+        [HttpGet("{Id}")]
+        public string GetFullLikebyId(Guid Id)
+        {
+            var response = _mediator.Send(new GetFullLikeByIdQuery(Id));
+            var json = JsonSerializer.Serialize(response.Result);
             return json;
         }
 

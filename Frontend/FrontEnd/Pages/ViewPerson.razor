@@ -5,31 +5,130 @@
 @inject NavigationManager NavigationManager
 @inject ILocalStorageService LocalStorage
 
-
-    <div class="max-w-md mx-auto rounded overflow-hidden shadow-lg my-4 margin-4 ">
-        <img class="w-full" src="http://www.garten-und-pflasterbau.de/Images/no-user-img.png" alt="Sunset in the mountains">
+@if (userResponse == null)
+{
+    <p>Loading</p>
+}
+else
+{<div class="max-w-md mx-auto rounded overflow-hidden shadow-lg my-4 margin-4 ">
+        <img class="w-full" src="data:image/jpg;base64, @userResponse.image" alt="User">
         <div class="px-4 py-3">
-            <div class="font-bold text-xl mb-2">Name here</div>
-            <div class="font-bold text-x2 mb-2">Email: Example@example.com</div>
-
-            <p>Birthday 14/12/2018</p>
+            <div class="font-bold text-xl mb-2">@FullName </div>
+            <div class="font-bold text-x2 mb-2">Email: @userResponse.user.Email</div>
         </div>
         <div class="px-6 py-4">
             <div class="mb-6 text-center">
-                <button class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-lg shadow-lg hover:bg-blue-700 hover:bg-blue hover:text-white border border-blue text-blue" type="button">
+                <button @onclick="LikeUser" class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-lg shadow-lg hover:bg-blue-700 hover:bg-blue hover:text-white border border-blue text-blue" type="button">
                     Like
                 </button>
                 <br><br>
-                <button class="w-full px-4 py-2 font-bold text-red bg-blue-500 rounded-lg shadow-lg hover:bg-red-700 hover:bg-red hover:text-white border border-red text-red" type="button">
-                    Ignore
+                <button @onclick="IgnoreUser" class="w-full px-4 py-2 font-bold text-red bg-blue-500 rounded-lg shadow-lg hover:bg-red-700 hover:bg-red hover:text-white border border-red text-red" type="button">
+                    Skip
                 </button>
             </div>
         </div>
     </div>
-
+}
 @code
     {
-    
+
     [Parameter] public string Username { get; set; }
-  
+
+    private string apiUrl = "https://localhost:5001/api/users/username/";
+    private string apiUrlLikes = "https://localhost:5040/api/likes/";
+
+    private UserResponse userResponse = null;
+    private string FullName = "";
+    UpdateLikeResponse likeResponse;
+    string personId;
+
+    protected override async Task OnInitializedAsync()
+    {
+        personId = await LocalStorage.GetItemAsync<string>("id");
+        Console.WriteLine("personId" + personId);
+        userResponse = await Http.GetJsonAsync<UserResponse>(apiUrl + $"{Username}/");
+
+        Console.WriteLine("userResponse");
+        FullName = userResponse.user.FirstName + " " + userResponse.user.LastName;
+    }
+
+
+    private UpdateLike updateLikeRequestBody(int like_type)
+    {
+        UpdateLike like = new UpdateLike()
+        {
+            PetOwnerId = personId,
+            PersonId = userResponse.user.Id,
+            PetLike = like_type
+        };
+
+        Console.WriteLine("OwnerID: " + like.PetOwnerId);
+        Console.WriteLine("PersonID: " +like.PersonId);
+
+        return like;
+    }
+
+    private async void LikeUser()
+    {
+        Console.WriteLine("Like");
+        likeResponse = await Http.PutJsonAsync<UpdateLikeResponse>($"{apiUrlLikes}", updateLikeRequestBody(1));
+        Console.WriteLine("Like finished!");
+
+        if (likeResponse.succes)
+        {
+            NavigationManager.NavigateTo("/");
+        }
+    }
+
+    private async void IgnoreUser()
+    {
+
+        likeResponse = await Http.PutJsonAsync<UpdateLikeResponse>($"{apiUrlLikes}", updateLikeRequestBody(-1));
+        if (likeResponse.succes)
+        {
+            NavigationManager.NavigateTo("/");
+        }
+        
+    }
+    public class User
+    {
+        public string Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public object ImagePath { get; set; }
+    }
+
+    public class UserResponse
+    {
+        public bool succes { get; set; }
+        public string image { get; set; }
+        public User user { get; set; }
+
+    }
+
+    public class Like
+    {
+        public string Id { get; set; }
+        public string PersonId { get; set; }
+        public string PetId { get; set; }
+        public int PersonLike { get; set; }
+        public int PetLike { get; set; }
+    }
+
+    public class UpdateLikeResponse
+    {
+        public bool succes { get; set; }
+        public Like like { get; set; }
+    }
+
+    public class UpdateLike
+    {
+        public string PersonId { get; set; }
+        public string PetOwnerId { get; set; }
+        public int PetLike { get; set; }
+    }
+
 }
