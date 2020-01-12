@@ -5,7 +5,7 @@ namespace Likes_MS.Data
     public class LikeContext : DbContext
     {
         public DbSet<Like> Likes { get; private set; }
-        
+
         public LikeContext(DbContextOptions<LikeContext> options) : base(options)
         {
             Database.EnsureCreated();
@@ -28,6 +28,11 @@ namespace Likes_MS.Data
             modelBuilder.Entity<Like>()
                .Property(l => l.PetId)
                .IsRequired().HasMaxLength(36);
+
+            modelBuilder.Entity<Like>()
+            .Property(l => l.PetOwnerId)
+            .IsRequired().HasMaxLength(36);
+
 
             modelBuilder.Entity<Like>()
                .Property(l => l.PersonLike)

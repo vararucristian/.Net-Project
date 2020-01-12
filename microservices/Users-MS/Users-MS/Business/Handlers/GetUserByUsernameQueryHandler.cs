@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,6 +22,7 @@ namespace Users_MS.Business.Handlers
         {
             var response = new Dictionary<string, object>();
             var users = UserContext.Users;
+            var image = "";
             var user = users.Where(u => u.UserName == request.UserName).FirstOrDefault();
             if (user == null)
             {
@@ -28,7 +31,9 @@ namespace Users_MS.Business.Handlers
             else
             {
                 response.Add("succes", true);
+                image = Convert.ToBase64String(File.ReadAllBytes(user.ImagePath));
             }
+            response.Add("image", image);
             response.Add("user", user);
             return response;
             

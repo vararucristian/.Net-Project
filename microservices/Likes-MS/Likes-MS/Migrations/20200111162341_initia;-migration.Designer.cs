@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Likes_MS.Migrations
 {
     [DbContext(typeof(LikeContext))]
-    [Migration("20200108173210_Initial-Migration")]
-    partial class InitialMigration
+    [Migration("20200111162341_initia;-migration")]
+    partial class initiamigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,6 +43,10 @@ namespace Likes_MS.Migrations
                     b.Property<int>("PetLike")
                         .HasColumnType("int")
                         .HasMaxLength(2);
+
+                    b.Property<Guid>("PetOwnerId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasMaxLength(36);
 
                     b.HasKey("Id");
 

@@ -66,19 +66,23 @@ namespace Likes_MS.Bussiness.Handler
         public async Task<Dictionary<string, object>> Handle(CreateLike request, CancellationToken cancellationToken)
         {
             string requestAddress= "https://localhost:5001/api/users/username/"+request.Username;
+            string likeUserRequestAddress = "https://localhost:5001/api/users/" + request.PersonId;
             string userResponseString = await client.GetStringAsync(requestAddress);
+            string likeUSerResponseString = await client.GetStringAsync(likeUserRequestAddress);
             UserResponse userResponse = JsonConvert.DeserializeObject<UserResponse>(userResponseString);
+            UserResponse likeUSerResponse = JsonConvert.DeserializeObject<UserResponse>(likeUSerResponseString);
             var response = new Dictionary<string, object>();
             var succes = true;
             var emailSent = false;
             if(request.PersonLike==1)
-                emailSent = SendEmail(userResponse.user.Email, request.Username);
-            var like = Like.Create(request.PersonId, request.PetId, request.PersonLike, request.PetLike);
+                emailSent = SendEmail(userResponse.user.Email, likeUSerResponse.user.UserName);
+            
             try
             {
-
+                var like = Like.Create(request.PersonId, request.PetId, userResponse.user.Id, request.PersonLike, request.PetLike);
                 LikeContext.Likes.Add(like);
                 await LikeContext.SaveChangesAsync(cancellationToken);
+                response.Add("like", like);
             }
             catch (InvalidOperationException)
             {
@@ -86,7 +90,6 @@ namespace Likes_MS.Bussiness.Handler
             }
 
             response.Add("succes", succes);
-            response.Add("like", like);
             response.Add("emailSent", emailSent);
             return response;
 

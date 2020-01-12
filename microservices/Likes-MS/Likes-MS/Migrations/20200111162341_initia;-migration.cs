@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Likes_MS.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class initiamigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,6 +14,7 @@ namespace Likes_MS.Migrations
                     Id = table.Column<Guid>(maxLength: 36, nullable: false),
                     PersonId = table.Column<Guid>(maxLength: 36, nullable: false),
                     PetId = table.Column<Guid>(maxLength: 36, nullable: false),
+                    PetOwnerId = table.Column<Guid>(maxLength: 36, nullable: false),
                     PersonLike = table.Column<int>(maxLength: 2, nullable: false),
                     PetLike = table.Column<int>(maxLength: 2, nullable: false)
                 },
