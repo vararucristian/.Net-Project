@@ -21,7 +21,7 @@ namespace Messages_MS
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-
+            services.AddCors();
             services.AddDbContext<MessageContext>();
 
             services.AddMediatR(typeof(Startup).Assembly);
@@ -36,6 +36,7 @@ namespace Messages_MS
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors(builder => builder.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
 
             app.UseHttpsRedirection();
 

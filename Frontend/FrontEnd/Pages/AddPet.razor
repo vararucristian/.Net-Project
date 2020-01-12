@@ -189,7 +189,7 @@
         petInfo.ImageData = string64;
         response = await Http.PostJsonAsync<CreatePetResponse>(apiUrl, petInfo);
         if (response.success)
-            NavigationManager.NavigateTo("/");
+            NavigationManager.NavigateTo("/", true);
 
     }
 

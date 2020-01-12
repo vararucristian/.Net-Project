@@ -87,7 +87,7 @@
                 Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             }
             await Http.GetAsync($"{apiUrl}authentificate");
-            //NavigationManager.NavigateTo("/");
+            NavigationManager.NavigateTo("/categories/");
         }
 
         //NavigationManager.NavigateTo("/");

@@ -36,12 +36,27 @@ else
 
     private string apiUrl = "https://localhost:5001/api/users/username/";
     private string apiUrlLikes = "https://localhost:5040/api/likes/";
+    private string apiUrlMessages = "https://localhost:7000/api/messages/";
 
     private UserResponse userResponse = null;
     private string FullName = "";
     UpdateLikeResponse likeResponse;
     string personId;
 
+
+    async Task SendMessagePetLike(string senderId, string receiverId)
+    {
+        
+        MessageRequest messageRequest = new MessageRequest()
+        {
+            SenderId = senderId,
+            ReceiverId = receiverId,
+            Text = "Just liked your pet"
+        };
+      
+        var response = await Http.PostJsonAsync<MessageResponse>(apiUrlMessages, messageRequest);
+        
+    }
     protected override async Task OnInitializedAsync()
     {
         personId = await LocalStorage.GetItemAsync<string>("id");
@@ -76,6 +91,7 @@ else
 
         if (likeResponse.succes)
         {
+            await SendMessagePetLike(userResponse.user.Id, personId);
             NavigationManager.NavigateTo("/");
         }
     }

@@ -3,279 +3,235 @@
 @inject HttpClient Http
 @inject LocationService  LocationService
 @inject NavigationManager NavigationManager
+@inject ILocalStorageService LocalStorage
+@using Microsoft.AspNetCore.Components.Web
 @using System.IO
+@using System.Timers;
+@using System
+@implements IDisposable
+
+@if (users.Count == 0)
+{
+    <p>Loading</p>
+}
+else
+{
+
+    <div class="mb-12 flex rounded w-4/5 h-local-custom m-local-custom shadow-lg" style="overflow-anchor: none;height: calc(100vh - 180px)">
+
+        <div class="bg-grey-darkest text-purple-lighter w-15">
+
+            <div class="py-8 px-4 mb-3 font-sans">Direct Messages</div>
 
 
-<div class="flex rounded overflow-hidden w-4/5 h-local-custom m-local-custom shadow-lg">
+            <!--
 
-    <div class="bg-grey-darkest text-purple-lighter w-15">
+            <div class="flex items-center mb-3 px-4">
+                <img src="http://www.garten-und-pflasterbau.de/Images/no-user-img.png" class="w-10 h-10 rounded mr-3" />
+                <span class="text-purple-lightest">Adam Bishop</span>
+            </div>
 
-        <div class="py-8 px-4 mb-3 font-sans">Direct Messages</div>
+            <div class="flex items-center px-4 mb-6">
+                <img src="https://avatars2.githubusercontent.com/u/343407?s=460&v=4" class="w-10 h-10 rounded mr-3" />
+                <span class="text-purple-lightest">killgt</span>
+                <img src="new_message.png" class="mx-4 w-auto h-10" />
+            </div>
+                -->
+            @foreach (var user in users)
+            {
 
-
-
-
-        <div class="flex items-center mb-3 px-4">
-            <img src="http://www.garten-und-pflasterbau.de/Images/no-user-img.png" class="w-10 h-10 rounded mr-3" />
-            <span class="text-purple-lightest">Adam Bishop</span>
+                <div style="cursor: pointer;" @onclick="(() => LoadMessages(user.user, user.imageData))" class="flex items-center mb-3 px-4">
+                    <img src="data:image/jpg;base64, @user.imageData" class="w-10 h-10 rounded mr-3" />
+                    <span class="text-purple-lightest">@user.user.FirstName @user.user.LastName</span>
+                </div>
+            }
         </div>
 
-        <div class="flex items-center px-4 mb-6">
-            <img src="https://avatars2.githubusercontent.com/u/343407?s=460&v=4" class="w-10 h-10 rounded mr-3" />
-            <span class="text-purple-lightest">killgt</span>
-            <img src="new_message.png" class="mx-4 w-auto h-10" />
-        </div>
+        <!-- Chat content -->
+        <div class="pt-8 w-full flex flex-col ">
+            <!-- Top bar -->
+            <div class="pt-8 w-full flex flex-col overflow-x-scroll">
+                @if (sender != null && messages != null)
+                {
+                    @foreach (var message in messages)
+                    {
+                        if (message.SenderId == sender.Id)
+                        {
+                            <div class="px-8 -py-2 m-1 ">
+                                <!-- A message -->
+                                <div class="flex items-start mt-8 mb-8">
+                                    <img src="data:image/jpg;base64, @senderImage" class="w-10 h-10 rounded mr-3" />
+                                    <div class="flex flex-col">
+                                        <div class="flex items-end">
+                                            <span class="font-bold text-md mr-2 font-sans">@sender.UserName</span>
+                                            <span class="text-grey text-xs font-light">@message.CreatedAt</span>
+                                        </div>
+                                        <p class="font-light text-md text-grey-darkest pt-1">@message.Text</p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="px-8 -py-2 m-1" style="background-color:#b7ddf0;">
+                                <!-- A message -->
+                                <div class="flex items-start mt-8 mb-8">
+                                    <img src="data:image/jpg;base64, @profile.imageData" class="w-10 h-10 rounded mr-3" />
+                                    <div class="flex flex-col">
+                                        <div class="flex items-end">
+                                            <span class="font-bold text-md mr-2 font-sans">Me</span>
+                                            <span class="text-grey text-xs font-light">@message.CreatedAt</span>
+                                        </div>
+                                        <p class="font-light text-md text-grey-darkest pt-1">@message.Text</p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
 
-    </div>
 
-    <!-- Chat content -->
-    <div class="pt-8 w-full flex flex-col ">
-        <!-- Top bar -->
-        <div class="pt-8 w-full flex flex-col overflow-x-scroll">
-            <!-- Chat messages -->
-            <div class="px-8 -py-2 -mt-8 ">
-                <!-- A message -->
-                <div class="flex items-start mt-8 mb-8">
-                    <img src="https://avatars2.githubusercontent.com/u/343407?s=460&v=4" class="w-10 h-10 rounded mr-3" />
-                    <div class="flex flex-col">
-                        <div class="flex items-end">
-                            <span class="font-bold text-md mr-2 font-sans">killgt</span>
-                            <span class="text-grey text-xs font-light">11:46</span>
-                        </div>
-                        <p class="font-light text-md text-grey-darkest pt-1">The slack from the other side.</p>
-                    </div>
-                </div>
+                    }
+                }
+
+
+
+
+                <div style="overflow-anchor: auto; height: 1px"></div>
             </div>
-
-            <!-- Chat messages -->
-            <div class="px-8 -py-2 -mt-8 ">
-                <!-- A message -->
-                <div class="flex items-start mt-8 mb-8">
-                    <img src="https://avatars2.githubusercontent.com/u/343407?s=460&v=4" class="w-10 h-10 rounded mr-3" />
-                    <div class="flex flex-col">
-                        <div class="flex items-end">
-                            <span class="font-bold text-md mr-2 font-sans">killgt</span>
-                            <span class="text-grey text-xs font-light">11:46</span>
-                        </div>
-                        <p class="font-light text-md text-grey-darkest pt-1">The slack from the other side.</p>
-                    </div>
-                </div>
+            <div class="flex m-6 rounded-lg border-2 border-grey overflow-hidden h-auto">
+                <span @onclick="SendMessage" class="text-3xl text-grey px-3 border-r-2 border-grey content-center pt-auto ">+</span>
+                <form @onsubmit="SendMessage" class="w-full overflow-x-scroll" style="height: 5em;">
+                    <input type="text" @bind="TextMessage" class="w-full px-4 pt-auto overflow-x-scroll " style="height: 3em;" placeholder="Message"></input>
+                </form>
             </div>
-
-            <!-- Chat messages -->
-            <div class="px-8 -py-2 -mt-8 ">
-                <!-- A message -->
-                <div class="flex items-start mt-8 mb-8">
-                    <img src="https://avatars2.githubusercontent.com/u/343407?s=460&v=4" class="w-10 h-10 rounded mr-3" />
-                    <div class="flex flex-col">
-                        <div class="flex items-end">
-                            <span class="font-bold text-md mr-2 font-sans">killgt</span>
-                            <span class="text-grey text-xs font-light">11:46</span>
-                        </div>
-                        <p class="font-light text-md text-grey-darkest pt-1">The slack from the other side.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Chat messages -->
-            <div class="px-8 -py-2 -mt-8 ">
-                <!-- A message -->
-                <div class="flex items-start mt-8 mb-8">
-                    <img src="https://avatars2.githubusercontent.com/u/343407?s=460&v=4" class="w-10 h-10 rounded mr-3" />
-                    <div class="flex flex-col">
-                        <div class="flex items-end">
-                            <span class="font-bold text-md mr-2 font-sans">killgt</span>
-                            <span class="text-grey text-xs font-light">11:46</span>
-                        </div>
-                        <p class="font-light text-md text-grey-darkest pt-1">The slack from the other side.</p>
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- Chat messages -->
-            <div class="px-8 -py-2 -mt-8 ">
-                <!-- A message -->
-                <div class="flex items-start mt-8 mb-8">
-                    <img src="https://avatars2.githubusercontent.com/u/343407?s=460&v=4" class="w-10 h-10 rounded mr-3" />
-                    <div class="flex flex-col">
-                        <div class="flex items-end">
-                            <span class="font-bold text-md mr-2 font-sans">killgt</span>
-                            <span class="text-grey text-xs font-light">11:46</span>
-                        </div>
-                        <p class="font-light text-md text-grey-darkest pt-1">The slack from the other side.</p>
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- Chat messages -->
-            <div class="px-8 -py-2 -mt-8 ">
-                <!-- A message -->
-                <div class="flex items-start mt-8 mb-8">
-                    <img src="https://avatars2.githubusercontent.com/u/343407?s=460&v=4" class="w-10 h-10 rounded mr-3" />
-                    <div class="flex flex-col">
-                        <div class="flex items-end">
-                            <span class="font-bold text-md mr-2 font-sans">killgt</span>
-                            <span class="text-grey text-xs font-light">11:46</span>
-                        </div>
-                        <p class="font-light text-md text-grey-darkest pt-1">The slack from the other side.</p>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <!-- Chat messages -->
-            <div class="px-8 -py-2 -mt-8 ">
-                <!-- A message -->
-                <div class="flex items-start mt-8 mb-8">
-                    <img src="https://avatars2.githubusercontent.com/u/343407?s=460&v=4" class="w-10 h-10 rounded mr-3" />
-                    <div class="flex flex-col">
-                        <div class="flex items-end">
-                            <span class="font-bold text-md mr-2 font-sans">killgt</span>
-                            <span class="text-grey text-xs font-light">11:46</span>
-                        </div>
-                        <p class="font-light text-md text-grey-darkest pt-1">The slack from the other side.</p>
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- Chat messages -->
-            <div class="px-8 -py-2 -mt-8 ">
-                <!-- A message -->
-                <div class="flex items-start mt-8 mb-8">
-                    <img src="https://avatars2.githubusercontent.com/u/343407?s=460&v=4" class="w-10 h-10 rounded mr-3" />
-                    <div class="flex flex-col">
-                        <div class="flex items-end">
-                            <span class="font-bold text-md mr-2 font-sans">killgt</span>
-                            <span class="text-grey text-xs font-light">11:46</span>
-                        </div>
-                        <p class="font-light text-md text-grey-darkest pt-1">The slack from the other side.</p>
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- Chat messages -->
-            <div class="px-8 -py-2 -mt-8 ">
-                <!-- A message -->
-                <div class="flex items-start mt-8 mb-8">
-                    <img src="https://avatars2.githubusercontent.com/u/343407?s=460&v=4" class="w-10 h-10 rounded mr-3" />
-                    <div class="flex flex-col">
-                        <div class="flex items-end">
-                            <span class="font-bold text-md mr-2 font-sans">killgt</span>
-                            <span class="text-grey text-xs font-light">11:46</span>
-                        </div>
-                        <p class="font-light text-md text-grey-darkest pt-1">The slack from the other side.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="px-8 -py-2 -mt-8 flex-1 ">
-                <!-- A message -->
-                <div class="flex items-start mt-8 mb-8">
-                    <img src="https://avatars2.githubusercontent.com/u/343407?s=460&v=4" class="w-10 h-10 rounded mr-3" />
-                    <div class="flex flex-col">
-                        <div class="flex items-end">
-                            <span class="font-bold text-md mr-2 font-sans">killgt</span>
-                            <span class="text-grey text-xs font-light">11:46</span>
-                        </div>
-                        <p class="font-light text-md text-grey-darkest pt-1">The slack from the other side.</p>
-                    </div>
-                </div>
-
-            </div>
-
-
-
-        </div>
-        <div class="flex m-6 rounded-lg border-2 border-grey overflow-hidden h-auto">
-            <span class="text-3xl text-grey px-3 border-r-2 border-grey content-center pt-auto ">+</span>
-            <textarea class="w-full px-4 pt-auto overflow-x-scroll " placeholder="Message to "></textarea>
         </div>
     </div>
-</div>
-	
 
 
 
+}
 
 @code
 {
-    private string apiUrl = "https://localhost:7000/api/pets/";
-    Location location;
-    Animal animal;
-    CreatePetInfo petInfo = new CreatePetInfo();
-    CreatePetResponse response = null;
-    string status;
-    MemoryStream fileData = null;
-    IFileListEntry file;
-    string string64;
-    async Task HandleSelection(IFileListEntry[] files)
+    private string apiUrl = "https://localhost:7000/api/messages/";
+    private string apiUrlUsers = "https://localhost:7000/api/users/";
+
+    public string TextMessage;
+    List<Message> messages;
+    string personId;
+    List<string> receivers = new List<string>();
+    List<UserResponse> users = new List<UserResponse>();
+    User sender;
+    string senderImage;
+    string username;
+    UserResponse profile;
+    System.Timers.Timer t;
+    async void SendMessage()
     {
-        file = files.FirstOrDefault();
-        if (file != null)
+
+        MessageRequest messageRequest = new MessageRequest()
         {
-            // Just load into .NET memory to show it can be done
-            // Alternatively it could be saved to disk, or parsed in memory, or similar
-            fileData = new MemoryStream();
-            await file.Data.CopyToAsync(fileData);
-            string64 = Convert.ToBase64String(fileData.ToArray());
-            status = $"Finished loading {file.Size} bytes from {file.Name}";
-        }
+            SenderId = profile.user.Id,
+            ReceiverId = sender.Id,
+            Text = TextMessage
+        };
+        this.TextMessage = "";
+        var response = await Http.PostJsonAsync<MessageResponse>(apiUrl, messageRequest);
+        await LoadMessages(sender, senderImage);
+        StateHasChanged();
+    }
+    private async Task GetProfile(string id)
+    {
+        profile = await Http.GetJsonAsync<UserResponse>($"{apiUrlUsers}{id}");
     }
 
-
+    private async Task LoadMessages(User sender, string image)
+    {
+        this.sender = sender;
+        this.senderImage = image;
+        var msgs = await Http.GetJsonAsync<Message[]>($"{apiUrl}{personId}/{sender.Id}");
+        messages = msgs.ToList();
+    }
     protected override async Task OnInitializedAsync()
     {
-        location = await LocationService.GetLocationAsync();
-    }
-    public enum Animal
-    {
-        Dog,
-        Cat,
-        Fish,
-        Turtle,
-        Rabbit,
-        Parrot,
-        Hamster
-    }
-    public enum Gen
-    {
-        Male,
-        Female
-    }
-    public class CreatePetInfo
-    {
+        username = await LocalStorage.GetItemAsync<string>("username");
+        personId = await LocalStorage.GetItemAsync<string>("id");
+        await GetProfile(personId);
+        var response = await Http.GetJsonAsync<Message[]>($"{apiUrl}receiverid/{personId}");
+        var messages = response.ToList();
+        messages.OrderBy(x => x.CreatedAt).GroupBy(x => x.SenderId);
 
-        public string Name { get; set; }
-        public Animal Species { get; set; }
-        public Gen Genre { get; set; }
-        public string Username { get; set; }
-        public string Description { get; set; }
-        public DateTime BirthDate { get; set; }
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
-        public string ImageData { get; set; }
+        foreach (var message in messages)
+        {
+            if (receivers.Contains(message.SenderId))
+                continue;
+            receivers.Add(message.SenderId);
+            try
+            {
+                var resp = await Http.GetJsonAsync<UserResponse>($"{apiUrlUsers}{message.SenderId}");
+
+                if (!resp.succes)
+                    continue;
+                users.Add(resp);
+            }
+            catch
+            {
+
+            }
+
+
+        }
+        users.Reverse();
+        sender = users[0].user;
+        senderImage = users[0].imageData;
+        await LoadMessages(sender, senderImage);
+        await InvokeAsync(StateHasChanged);
+
+        t = new System.Timers.Timer();
+        t.Elapsed += async (s, e) =>
+        {
+            await LoadMessages(sender, senderImage);
+            await InvokeAsync(StateHasChanged);
+        };
+        t.Interval = 10000;
+        t.Start();
 
     }
-    private async void CreatePet()
+    void IDisposable.Dispose()
     {
-        petInfo.Longitude = (double)location.Longitude;
-        petInfo.Latitude = (double)location.Latitude;
-        petInfo.Username = "mike97m";
+        t.Stop();
 
-        petInfo.ImageData = string64;
-        response = await Http.PostJsonAsync<CreatePetResponse>(apiUrl, petInfo);
-        if (response.success)
-            NavigationManager.NavigateTo("/");
+        // Unsubscribe from the event when our component is disposed
 
     }
-
-    public class CreatePetResponse
+    public class Message
     {
-        public bool success { get; set; }
+        public string Id { get; set; }
+        public string SenderId { get; set; }
+        public string ReceiverId { get; set; }
+        public string Text { get; set; }
+        public DateTime CreatedAt { get; set; }
+    }
+    public class Receiver
+    {
+        public string Id { get; set; }
+        public DateTime CreatedAt { get; set; }
+    }
+
+    public class User
+    {
+        public string Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string ImagePath { get; set; }
+    }
+
+    public class UserResponse
+    {
+        public bool succes { get; set; }
+        public User user { get; set; }
+        public string imageData { get; set; }
     }
 }

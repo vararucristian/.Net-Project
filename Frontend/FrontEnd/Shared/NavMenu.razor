@@ -1,4 +1,8 @@
-﻿<div class="flex items-center flex-no-shrink text-white mr-6">
+﻿
+@inject ILocalStorageService LocalStorage
+@inject NavigationManager NavigationManager
+
+<div class="flex items-center flex-no-shrink text-white mr-6">
     <a class="text-white no-underline hover:text-white hover:no-underline" href="#">
         <span class="text-2xl pl-2"><i class="em em-grinning"></i> HappyPet</span>
     </a>
@@ -18,10 +22,19 @@
             <a class="inline-block text-grey-dark no-underline hover:text-grey-lighter hover:text-underline py-2 px-4" href="/categories">View pets</a>
         </li>
         <li class="mr-3">
-            <a class="inline-block text-grey-dark no-underline hover:text-grey-lighter hover:text-underline py-2 px-4" href="#">Messages</a>
+            <a class="inline-block text-grey-dark no-underline hover:text-grey-lighter hover:text-underline py-2 px-4" href="/messages/">Messages</a>
         </li>
         <li class="mr-3">
-            <a class="inline-block text-grey-dark no-underline hover:text-grey-lighter hover:text-underline py-2 px-4" href="#">My profile</a>
+            <a class="inline-block text-grey-dark no-underline hover:text-grey-lighter hover:text-underline py-2 px-4" @onclick="Logout">Logout</a>
         </li>
     </ul>
 </div>
+
+@code
+{
+    async void Logout()
+    {
+        await LocalStorage.ClearAsync();
+        NavigationManager.NavigateTo("/login", true);
+    }
+}
